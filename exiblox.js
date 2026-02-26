@@ -1772,3 +1772,28 @@ function exbDoSearch(query) {
 function escHtmlExb(t) {
   return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+function openExibloxApp() {
+    // 1. Показываем само окно на экране
+    const win = document.getElementById('win-exiblox');
+    if (win) {
+        win.style.display = 'flex';
+        // Если у тебя в системе окна должны перекрывать друг друга, 
+        // можно добавить: win.style.zIndex = '2000';
+    }
+
+    // 2. Проверяем, подгружен ли файл exiblox.js
+    // Если функции из него еще нет в памяти браузера:
+    if (typeof initExiblox === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'exiblox.js'; // Убедись, что файл лежит в корне проекта
+        script.onload = () => {
+            console.log("Exiblox v3 загружен успешно!");
+            // Вызываем функцию инициализации из твоего файла
+            if (typeof initExiblox === 'function') initExiblox();
+        };
+        document.body.appendChild(script);
+    } else {
+        // Если файл уже был загружен ранее, просто запускаем его заново
+        initExiblox();
+    }
+}
