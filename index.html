@@ -460,7 +460,10 @@ body.light-theme .echat-input-area{background:rgba(0,0,0,.04);}
 <div class="desk-icon" data-icon-id="icon-paint" style="top:16px;left:118px" ondblclick="openApp('paint')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🎨</div><span>Paint</span></div>
 <div class="desk-icon" data-icon-id="icon-taskman" style="top:112px;left:118px" ondblclick="openApp('taskman')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">📊</div><span>Диспетчер задач</span></div>
 <div class="desk-icon" data-icon-id="icon-exianai" style="top:208px;left:118px" ondblclick="openApp('exianai')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🤖</div><span>Exian.AI 3.0</span></div>
-<div class="desk-icon" data-icon-id="icon-exiblox" style="top:304px;left:118px" ondblclick="launchExiblox()" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🐍</div><span>Exiblox v3</span></div>
+<div class="desk-icon" data-icon-id="icon-exiblox" ondblclick="openExibloxApp()" onmousedown="iconDragStart(event,this)">
+    <div class="dico">🐍</div>
+    <span>Exiblox v3</span>
+</div>
 <div class="desk-icon" data-icon-id="icon-gta6" style="top:400px;left:118px" ondblclick="openApp('gta6')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🎮</div><span>GTA 6</span></div>
 <!-- NEW ICONS -->
 <div class="desk-icon" data-icon-id="icon-updates" style="top:16px;left:218px" ondblclick="openApp('updates')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🔔</div><span>Обновления</span></div>
@@ -487,6 +490,24 @@ body.light-theme .echat-input-area{background:rgba(0,0,0,.04);}
 <div class="tb-btn" id="tb-gta6" onclick="tbClick('gta6')">🎮</div>
 <div class="tb-btn" id="tb-updates" onclick="tbClick('updates')">🔔</div>
 <div class="tb-btn" id="tb-parkour" onclick="tbClick('parkour')">🏃</div>
+ <div class="tb-btn" id="tb-parkour" onclick="tbClick('parkour')">🏃</div>
+
+<div id="win-exiblox" class="window" style="display:none; position:absolute; width:900px; height:600px; top:50px; left:100px; flex-direction:column; z-index:2000;">
+    <div class="titlebar">
+        <div style="display:flex; align-items:center; gap:8px;">
+            <span class="tb-icon">🐍</span>
+            <span class="tb-title">Exiblox v3</span>
+        </div>
+        <div class="win-btns">
+            <div class="wb" onclick="document.getElementById('win-exiblox').style.display='none'">✕</div>
+        </div>
+    </div>
+    <div class="win-body" style="background:#0a0c14; flex:1; position:relative; overflow:hidden;">
+        <div id="exiblox-root" style="height:100%; width:100%;"></div>
+    </div>
+</div>
+
+<div id="tb-right">
 </div>
 <div id="tb-right">
 <div class="tb-sys" onclick="toggleTray(event)"><span>📶</span><span>🔊</span><span>🔋</span></div>
