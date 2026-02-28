@@ -140,12 +140,13 @@ body.light-theme .desk-icon span{color:var(--text);text-shadow:0 1px 3px rgba(25
 /* ══════════════════════════════════════════
    TASKBAR
 ══════════════════════════════════════════ */
-#taskbar{position:fixed;bottom:0;left:0;right:0;height:48px;background:var(--taskbar-bg);backdrop-filter:var(--blur);border-top:1px solid var(--border);display:flex;align-items:center;z-index:1000;}
+#taskbar{position:fixed;bottom:0;left:0;right:0;height:48px;background:rgba(0,0,0,0.28);backdrop-filter:blur(32px) saturate(180%);-webkit-backdrop-filter:blur(32px) saturate(180%);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;z-index:1000;transition:background .5s;}
+body.light-theme #taskbar{background:rgba(255,255,255,0.28);backdrop-filter:blur(32px) saturate(200%);-webkit-backdrop-filter:blur(32px) saturate(200%);border-top:1px solid rgba(0,0,0,0.07);}
 #tb-left{display:flex;align-items:center;padding-left:8px;gap:2px;}
 #tb-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:2px;}
 #tb-right{position:absolute;right:0;display:flex;align-items:center;padding-right:8px;gap:4px;}
-#start-btn{width:44px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:900;transition:background .15s;gap:1px;}
-#start-btn .rl{font-size:11px;animation-duration:3s;}
+#start-btn{width:52px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;font-size:22px;font-weight:900;transition:background .15s;gap:1px;}
+#start-btn .rl{font-size:18px;animation-duration:3s;}
 #start-btn:hover{background:rgba(255,255,255,.1);}
 .tb-sep{width:1px;height:22px;background:var(--border);margin:0 4px;}
 .tb-btn{width:44px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;font-size:19px;transition:background .15s;position:relative;flex-shrink:0;}
@@ -389,6 +390,17 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:rgba(128,128,128,.25);border-radius:3px;}
+
+/* ── SCREEN DIMMER ── */
+#screen-dimmer{position:fixed;inset:0;background:transparent;pointer-events:none;z-index:9950;transition:background .25s;}
+#screen-dimmer.dim-active{pointer-events:auto;}
+#dim-panel{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(6px);background:rgba(10,12,24,.96);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 20px;display:none;align-items:center;gap:12px;z-index:9960;box-shadow:0 8px 32px rgba(0,0,0,.6);transition:transform .2s,opacity .2s;opacity:0;}
+#dim-panel.dim-show{display:flex;opacity:1;transform:translateX(-50%) translateY(0);}
+#dim-panel label{font-size:12px;color:rgba(255,255,255,.55);white-space:nowrap;}
+#dim-range{width:160px;accent-color:#60cdff;cursor:pointer;}
+#dim-val-txt{font-size:12px;color:rgba(255,255,255,.4);width:30px;text-align:right;}
+#dim-panel-close{color:rgba(255,255,255,.35);cursor:pointer;font-size:15px;margin-left:4px;padding:2px 5px;border-radius:5px;transition:background .12s;}
+#dim-panel-close:hover{background:rgba(196,43,28,.7);color:#fff;}
 </style>
 </head>
 <body>
@@ -572,6 +584,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="tr-tile" id="tr-dark-theme" onclick="openWallpaperGallery('dark')"><div class="ico">🌑</div><div class="lbl">Тёмная</div></div>
 <div class="tr-tile" id="tr-sound" onclick="toggleTile('tr-sound','Звук')"><div class="ico">🔊</div><div class="lbl">Звук</div></div>
 <div class="tr-tile off" id="tr-focus" onclick="toggleTile('tr-focus','Фокус')"><div class="ico">🎯</div><div class="lbl">Фокус</div></div>
+<div class="tr-tile off" id="tr-dim" onclick="toggleDimPanel()"><div class="ico">🌑</div><div class="lbl">Затемнение</div></div>
 </div>
 <div class="sl-row"><span class="ico">🔆</span><input type="range" min="10" max="100" value="85" oninput="el('bright-val').textContent=this.value+'%'"><span class="sl-val" id="bright-val">85%</span></div>
 <div class="sl-row"><span class="ico">🔊</span><input type="range" min="0" max="100" value="60" oninput="el('vol-val').textContent=this.value+'%'"><span class="sl-val" id="vol-val">60%</span></div>
@@ -587,6 +600,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="wp-tabs">
 <div class="wp-tab active" id="wp-tab-dark" onclick="wpSwitchTab('dark')">🌑 Тёмные</div>
 <div class="wp-tab" id="wp-tab-light" onclick="wpSwitchTab('light')">☀️ Светлые</div>
+<div class="wp-tab" id="wp-tab-nature" onclick="wpSwitchTab('nature')">🌿 Природа</div>
 </div>
 <div class="wp-grid" id="wp-grid"></div>
 </div>
@@ -834,6 +848,14 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 </div>
 
 <div id="notif-stack"></div>
+<div id="screen-dimmer"></div>
+<div id="dim-panel">
+  <span style="font-size:16px">🌑</span>
+  <label>Затемнение</label>
+  <input type="range" id="dim-range" min="0" max="90" value="0" oninput="applyDim(+this.value)">
+  <span id="dim-val-txt">0%</span>
+  <div id="dim-panel-close" onclick="hideDimPanel()">✕</div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════
      MAIN ENGINE SCRIPT
@@ -1233,6 +1255,41 @@ const WALLPAPERS={
   {id:'d21',name:'Вулкан 2',css:'radial-gradient(ellipse at 50% 100%,#2a0800 0%,#150300 40%,#000000 100%)'},
   {id:'d22',name:'Тёмный океан',css:'linear-gradient(180deg,#000a10 0%,#001020 40%,#001828 70%,#000810 100%)'},
   {id:'d23',name:'Радиация',css:'radial-gradient(ellipse at 50% 50%,#001a00 0%,#000d00 50%,#000000 100%)'},
+  {id:'c01',name:'🌌 Млечный путь',css:'radial-gradient(ellipse at 50% 60%,#1a0a2e 0%,#0d051a 40%,#000005 100%)'},
+  {id:'c02',name:'🌌 Туманность Орёл',css:'radial-gradient(ellipse at 30% 40%,#0d1a3a 0%,#1a0a2e 35%,#000510 70%,#000003 100%)'},
+  {id:'c03',name:'🔵 Голубой гигант',css:'radial-gradient(circle at 40% 35%,#001040 0%,#000820 50%,#000005 100%)'},
+  {id:'c04',name:'🟣 Туманность Криль',css:'radial-gradient(ellipse at 60% 50%,#200a3a 0%,#0f0520 50%,#000003 100%)'},
+  {id:'c05',name:'🌠 Звёздное поле',css:'linear-gradient(160deg,#000008 0%,#050010 30%,#000510 60%,#000008 100%)'},
+  {id:'c06',name:'☀️ Солнечный ветер',css:'radial-gradient(ellipse at 20% 30%,#1a0800 0%,#280d00 30%,#0a0400 60%,#000000 100%)'},
+  {id:'c07',name:'🌑 Тёмная материя',css:'linear-gradient(135deg,#000000 0%,#020005 25%,#000200 50%,#050002 75%,#000000 100%)'},
+  {id:'c08',name:'💫 Пульсар',css:'radial-gradient(circle at 50% 50%,#0a001a 0%,#000a1a 40%,#000000 100%)'},
+  {id:'c09',name:'🔴 Красный карлик',css:'radial-gradient(ellipse at 45% 45%,#1a0300 0%,#0d0100 50%,#000000 100%)'},
+  {id:'c10',name:'🌊 Космический риф',css:'linear-gradient(160deg,#000a14 0%,#001520 35%,#000a10 65%,#000508 100%)'},
+  {id:'c11',name:'⚡ Нейтронная звезда',css:'radial-gradient(circle at 50% 30%,#1a1a00 0%,#0d0d00 40%,#000000 100%)'},
+  {id:'c12',name:'🌀 Галактика M87',css:'conic-gradient(from 0deg at 50% 50%,#000000 0deg,#050010 60deg,#0a0005 120deg,#000010 180deg,#000000 240deg,#050005 300deg,#000000 360deg)'},
+  {id:'c13',name:'🔮 Квазар',css:'radial-gradient(ellipse at 50% 50%,#100020 0%,#080010 40%,#000003 70%,#000000 100%)'},
+  {id:'c14',name:'🌌 Андромеда',css:'radial-gradient(ellipse at 55% 55%,#0a0a1e 0%,#050510 40%,#000005 100%)'},
+  {id:'c15',name:'💥 Сверхновая',css:'radial-gradient(circle at 50% 50%,#200800 0%,#140400 30%,#060001 60%,#000000 100%)'},
+  {id:'c16',name:'🌙 Лунная пыль',css:'linear-gradient(200deg,#0a0a0a 0%,#141414 40%,#0a0a0a 100%)'},
+  {id:'c17',name:'🟤 Коричневый карлик',css:'radial-gradient(ellipse at 40% 60%,#150800 0%,#0a0400 45%,#000000 100%)'},
+  {id:'c18',name:'🔵 Белый карлик',css:'radial-gradient(circle at 50% 40%,#050510 0%,#020208 45%,#000000 100%)'},
+  {id:'c19',name:'🌌 Конская Голова',css:'linear-gradient(160deg,#050008 0%,#0a0015 30%,#050008 60%,#000003 100%)'},
+  {id:'c20',name:'⭐ Плеяды',css:'radial-gradient(ellipse at 70% 30%,#080815 0%,#040410 50%,#000000 100%)'},
+  {id:'c21',name:'🟣 Крабовидная',css:'radial-gradient(ellipse at 50% 40%,#150015 0%,#0a000a 45%,#000000 100%)'},
+  {id:'c22',name:'🌊 Кошачий глаз',css:'radial-gradient(circle at 50% 50%,#001414 0%,#000a0a 45%,#000000 100%)'},
+  {id:'c23',name:'💫 Аккреционный диск',css:'conic-gradient(from 90deg at 50% 50%,#200800 0deg,#000000 40deg,#150500 80deg,#000000 120deg,#200800 160deg,#000000 200deg,#100300 240deg,#000000 280deg,#200800 320deg,#000000 360deg)'},
+  {id:'c24',name:'🌌 Скопление Геркулес',css:'radial-gradient(ellipse at 50% 50%,#060610 0%,#030308 50%,#000000 100%)'},
+  {id:'c25',name:'🔴 Марс',css:'radial-gradient(circle at 40% 40%,#1a0800 0%,#120500 40%,#030000 100%)'},
+  {id:'c26',name:'🟣 Магнетар',css:'radial-gradient(ellipse at 30% 70%,#1a0028 0%,#0d0018 45%,#000000 100%)'},
+  {id:'c27',name:'💙 Аврора в космосе',css:'linear-gradient(170deg,#000800 0%,#001800 25%,#001a10 50%,#000a08 75%,#000000 100%)'},
+  {id:'c28',name:'🌌 Поле Хаббл',css:'linear-gradient(145deg,#000000 0%,#030008 25%,#000005 50%,#050003 75%,#000000 100%)'},
+  {id:'c29',name:'⚫ Горизонт событий',css:'radial-gradient(circle at 50% 50%,#000000 0%,#000000 20%,#050005 45%,#020008 65%,#000000 100%)'},
+  {id:'c30',name:'🌠 Персеиды',css:'linear-gradient(160deg,#000005 0%,#020010 40%,#000008 100%)'},
+  {id:'c31',name:'🟡 Туманность Бабочка',css:'radial-gradient(ellipse at 50% 50%,#141400 0%,#0a0a00 45%,#000000 100%)'},
+  {id:'c32',name:'🌌 Межзвёздное',css:'linear-gradient(180deg,#000000 0%,#010005 20%,#000000 40%,#030002 60%,#000000 100%)'},
+  {id:'c33',name:'💜 Туманность Розетка',css:'radial-gradient(ellipse at 50% 50%,#1a0018 0%,#0d000d 40%,#000000 100%)'},
+  {id:'c34',name:'🔵 Нептун',css:'radial-gradient(circle at 45% 45%,#000a18 0%,#000510 50%,#000000 100%)'},
+  {id:'c35',name:'🌌 Центр галактики',css:'radial-gradient(ellipse at 50% 50%,#1a0a00 0%,#100500 30%,#040000 60%,#000000 100%)'},
  ],
  light:[
   {id:'l0',name:'Sky Blue',css:'linear-gradient(160deg,#dceeff,#eef4fb 40%,#d8eaf5)',def:true},
@@ -1256,34 +1313,88 @@ const WALLPAPERS={
   {id:'l18',name:'Молоко',css:'linear-gradient(160deg,#fffffe 0%,#fafaf8 40%,#fffff8 100%)'},
   {id:'l19',name:'Белый коралл',css:'linear-gradient(135deg,#fff8f5 0%,#fff0ed 40%,#fff8f5 100%)'},
   {id:'l20',name:'Туман',css:'linear-gradient(160deg,#f8f8ff 0%,#f0f0fa 40%,#f5f5ff 100%)'},
+ ],
+ nature:[
+  {id:'n01',name:'🌲 Хвойный лес',css:'linear-gradient(180deg,#2d6e3a 0%,#1e5228 30%,#173d1e 60%,#0e2812 100%)'},
+  {id:'n02',name:'🌴 Джунгли',css:'linear-gradient(180deg,#0a2e10 0%,#1a5a1e 25%,#1e6a22 50%,#124018 75%,#081808 100%)'},
+  {id:'n03',name:'🌻 Солнечная поляна',css:'linear-gradient(180deg,#87ceeb 0%,#a8ddf0 28%,#c8eed8 48%,#8ec86a 68%,#6aaa48 100%)'},
+  {id:'n04',name:'🏡 Домик на закате',css:'linear-gradient(180deg,#e8600a 0%,#f07820 18%,#f8a840 36%,#ffd080 54%,#d0eea0 72%,#90cc70 100%)'},
+  {id:'n05',name:'⛅ Дневные облака',css:'linear-gradient(180deg,#3890cc 0%,#60aae0 22%,#90ccf0 44%,#c0e4f8 64%,#e8f4ff 82%,#ffffff 100%)'},
+  {id:'n06',name:'🌾 Пшеничное поле',css:'linear-gradient(180deg,#70b8d8 0%,#90cce8 28%,#f0e060 52%,#d8c040 70%,#c0a030 100%)'},
+  {id:'n07',name:'🌸 Цветущий сад',css:'linear-gradient(160deg,#ffd0f0 0%,#ffb8e8 20%,#ffd898 42%,#f8eca0 62%,#c0e8a0 80%,#98d878 100%)'},
+  {id:'n08',name:'🏔️ Горы со снегом',css:'linear-gradient(180deg,#5898c8 0%,#78b0e0 22%,#a8ccf0 42%,#c8d8e0 58%,#b8b8b0 74%,#989890 100%)'},
+  {id:'n09',name:'🌅 Морской закат',css:'linear-gradient(180deg,#183278 0%,#4840a0 18%,#a04878 36%,#d86848 52%,#e89838 66%,#f8d050 80%,#ffe878 100%)'},
+  {id:'n10',name:'🌊 Тропический океан',css:'linear-gradient(180deg,#80c8e8 0%,#58b0d8 22%,#2890c0 44%,#1070a8 64%,#084888 100%)'},
+  {id:'n11',name:'🌿 Бамбуковый лес',css:'linear-gradient(160deg,#1a4a1a 0%,#2a6a2a 28%,#388a38 52%,#2a7a2a 74%,#1a4a1a 100%)'},
+  {id:'n12',name:'❄️ Зимний лес',css:'linear-gradient(180deg,#a8ccec 0%,#c8e0f4 22%,#e0eef8 42%,#f0f8ff 58%,#d8e8ec 76%,#b8d0d0 100%)'},
+  {id:'n13',name:'🌄 Туманное утро',css:'linear-gradient(180deg,#6888a8 0%,#90a8c8 22%,#b8cce0 42%,#d0e0ee 58%,#e0eef6 76%,#f0f8ff 100%)'},
+  {id:'n14',name:'🍂 Осенний лес',css:'linear-gradient(160deg,#b03810 0%,#d05818 22%,#d87828 42%,#c89030 62%,#a87018 80%,#885010 100%)'},
+  {id:'n15',name:'🌈 После дождя',css:'linear-gradient(160deg,#90b8d8 0%,#b0d0ec 22%,#c8e4f4 42%,#d8f0e0 60%,#e8f8d8 78%,#f4fce8 100%)'},
  ]
 };
-let curWpTab='dark',curWpId={dark:'d0',light:'l0'};
+let curWpTab='dark',curWpId={dark:'d0',light:'l0',nature:'n03'};
 window.openWallpaperGallery=function(mode){
- curWpTab=mode||'dark';el('wp-tab-dark').classList.toggle('active',curWpTab==='dark');el('wp-tab-light').classList.toggle('active',curWpTab==='light');
+ curWpTab=mode||'dark';
+ ['dark','light','nature'].forEach(t=>{const tb=el('wp-tab-'+t);if(tb)tb.classList.toggle('active',t===curWpTab);});
  renderWpGrid(curWpTab);el('tray-popup').style.display='none';el('wallpaper-gallery').style.display='block';
 };
 window.closeWallpaperGallery=function(){el('wallpaper-gallery').style.display='none';};
-window.wpSwitchTab=function(t){curWpTab=t;el('wp-tab-dark').classList.toggle('active',t==='dark');el('wp-tab-light').classList.toggle('active',t==='light');renderWpGrid(t);};
+window.wpSwitchTab=function(t){
+ curWpTab=t;
+ ['dark','light','nature'].forEach(k=>{const tb=el('wp-tab-'+k);if(tb)tb.classList.toggle('active',k===t);});
+ renderWpGrid(t);
+};
 function renderWpGrid(tab){
  const grid=el('wp-grid');grid.innerHTML='';
- WALLPAPERS[tab].forEach(wp=>{
+ const list=WALLPAPERS[tab]||[];
+ list.forEach(wp=>{
   const div=document.createElement('div');div.className='wp-item'+(curWpId[tab]===wp.id?' wp-active':'');
   div.style.background=wp.css;div.title=wp.name;
   div.innerHTML=`<div class="wp-item-label">${wp.name}</div>`;
   div.onclick=()=>{
    curWpId[tab]=wp.id;
-   if(tab==='light')document.body.classList.add('light-theme');else document.body.classList.remove('light-theme');
+   const isLight=(tab==='light');
+   if(isLight)document.body.classList.add('light-theme');else document.body.classList.remove('light-theme');
    el('desktop').style.background=wp.css;
-   localStorage.setItem('exiwin_wallpaper',JSON.stringify({css:wp.css,isLight:tab==='light'}));
+   localStorage.setItem('exiwin_wallpaper',JSON.stringify({css:wp.css,isLight,tab,id:wp.id}));
    renderWpGrid(tab);showNotif('Обои','Фон «'+wp.name+'»','🖼️');
   };
   grid.appendChild(div);
  });
 }
 function loadSavedWallpaper(){
- try{const wp=JSON.parse(localStorage.getItem('exiwin_wallpaper')||'null');if(wp){el('desktop').style.background=wp.css;if(wp.isLight)document.body.classList.add('light-theme');}}catch(e){}
+ try{
+  const saved=JSON.parse(localStorage.getItem('exiwin_wallpaper')||'null');
+  if(saved){
+   el('desktop').style.background=saved.css;
+   if(saved.isLight)document.body.classList.add('light-theme');
+   if(saved.tab&&saved.id)curWpId[saved.tab]=saved.id;
+  }
+ }catch(e){}
 }
+
+/* ── DIMMER ── */
+window.applyDim=function(v){
+ const d=el('screen-dimmer');
+ if(d){d.style.background='rgba(0,0,0,'+(v/100)+')';d.classList.toggle('dim-active',v>0);}
+ const t=el('dim-val-txt');if(t)t.textContent=v+'%';
+ const r=el('dim-range');if(r)r.value=v;
+ localStorage.setItem('exiwin_dim',v);
+};
+window.toggleDimPanel=function(){
+ const p=el('dim-panel');
+ if(!p)return;
+ const show=!p.classList.contains('dim-show');
+ p.style.display='flex';
+ setTimeout(()=>p.classList.toggle('dim-show',show),10);
+ el('tr-dim').classList.toggle('off',!show);
+};
+window.hideDimPanel=function(){
+ const p=el('dim-panel');if(p)p.classList.remove('dim-show');
+ el('tr-dim').classList.add('off');
+};
+// Restore dim on load
+(function(){try{const sv=localStorage.getItem('exiwin_dim');if(sv&&+sv>0)setTimeout(()=>applyDim(+sv),300);}catch(e){}})();
 
 // ── EXIBLOX ───────────────────────────────────────────────
 window.openExibloxApp=function(){
