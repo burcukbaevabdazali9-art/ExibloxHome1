@@ -25,11 +25,12 @@ body.light-theme{
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#000;overflow:hidden;width:100vw;height:100vh;color:var(--text);}
 
 /* ══════════════════════════════════════════
-   BOOT SCREEN — СИНЕ-БЕЛАЯ АНИМАЦИЯ
+   BOOT SCREEN
 ══════════════════════════════════════════ */
 #boot{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .6s;}
 .boot-logo-wrap{display:flex;align-items:center;gap:3px;margin-bottom:16px;font-size:52px;font-weight:900;letter-spacing:1px;line-height:1;}
-.rl{display:inline-block;animation:blueShimmer 2.8s linear infinite;font-style:normal;}
+.rl{display:inline-block;animation:rainbowSpin 2.8s linear infinite;font-style:normal;}
+/* each letter offset by delay for wave effect */
 .rl:nth-child(1){animation-delay:0s;}
 .rl:nth-child(2){animation-delay:.12s;}
 .rl:nth-child(3){animation-delay:.24s;}
@@ -47,28 +48,29 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#000;overflow:hidden
 .rl:nth-child(15){animation-delay:1.68s;}
 .rl:nth-child(16){animation-delay:1.80s;}
 .rl:nth-child(17){animation-delay:1.92s;}
-/* Сине-белое переливание — как радуга, но только синий/голубой/белый */
-@keyframes blueShimmer{
-0%  {color:#ffffff;text-shadow:0 0 22px rgba(255,255,255,0.9),0 0 40px rgba(96,205,255,0.6);}
-12% {color:#c8ecff;text-shadow:0 0 22px rgba(150,220,255,0.9),0 0 40px rgba(0,120,212,0.5);}
-25% {color:#60cdff;text-shadow:0 0 22px rgba(0,178,255,0.9),0 0 45px rgba(0,140,255,0.7);}
-37% {color:#00b2ff;text-shadow:0 0 22px rgba(0,150,255,1),0 0 50px rgba(0,100,255,0.8);}
-50% {color:#0078d4;text-shadow:0 0 22px rgba(0,120,212,1),0 0 50px rgba(0,80,200,0.9);}
-62% {color:#60cdff;text-shadow:0 0 22px rgba(96,205,255,0.9),0 0 45px rgba(0,160,255,0.7);}
-75% {color:#b8e8ff;text-shadow:0 0 22px rgba(180,232,255,0.9),0 0 40px rgba(0,120,255,0.5);}
-88% {color:#e8f6ff;text-shadow:0 0 22px rgba(232,246,255,0.9),0 0 35px rgba(96,205,255,0.6);}
-100%{color:#ffffff;text-shadow:0 0 22px rgba(255,255,255,0.9),0 0 40px rgba(96,205,255,0.6);}
+/* 10 keyframe stops = 10 shades per letter */
+@keyframes rainbowSpin{
+0%  {color:hsl(0,100%,65%);text-shadow:0 0 18px hsl(0,100%,50%);}
+11% {color:hsl(36,100%,65%);text-shadow:0 0 18px hsl(36,100%,50%);}
+22% {color:hsl(72,100%,60%);text-shadow:0 0 18px hsl(72,100%,45%);}
+33% {color:hsl(120,100%,60%);text-shadow:0 0 18px hsl(120,100%,45%);}
+44% {color:hsl(180,100%,60%);text-shadow:0 0 18px hsl(180,100%,45%);}
+55% {color:hsl(210,100%,65%);text-shadow:0 0 18px hsl(210,100%,50%);}
+66% {color:hsl(260,100%,70%);text-shadow:0 0 18px hsl(260,100%,55%);}
+77% {color:hsl(300,100%,65%);text-shadow:0 0 18px hsl(300,100%,50%);}
+88% {color:hsl(330,100%,65%);text-shadow:0 0 18px hsl(330,100%,50%);}
+100%{color:hsl(360,100%,65%);text-shadow:0 0 18px hsl(360,100%,50%);}
 }
 .boot-tagline{color:rgba(255,255,255,.3);font-size:13px;letter-spacing:3px;margin-bottom:36px;text-transform:uppercase;}
+/* RAINBOW loading bar */
 .boot-bar{width:240px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;position:relative;}
-.boot-fill{height:100%;border-radius:3px;animation:bootFill 2.4s ease forwards,blueBar 1.5s linear infinite;}
+.boot-fill{height:100%;border-radius:3px;animation:bootFill 2.4s ease forwards,rainbowBar 1.5s linear infinite;}
 @keyframes bootFill{0%{width:0}55%{width:65%}100%{width:100%}}
-@keyframes blueBar{
-0%  {background:linear-gradient(90deg,#0050c8,#60cdff,#ffffff);}
-25% {background:linear-gradient(90deg,#ffffff,#00b2ff,#0078d4);}
-50% {background:linear-gradient(90deg,#0078d4,#c8ecff,#00b2ff);}
-75% {background:linear-gradient(90deg,#60cdff,#ffffff,#0050c8);}
-100%{background:linear-gradient(90deg,#0050c8,#60cdff,#ffffff);}
+@keyframes rainbowBar{
+0%{background:linear-gradient(90deg,hsl(0,100%,60%),hsl(60,100%,60%),hsl(120,100%,60%));}
+33%{background:linear-gradient(90deg,hsl(120,100%,60%),hsl(200,100%,60%),hsl(280,100%,60%));}
+66%{background:linear-gradient(90deg,hsl(280,100%,60%),hsl(320,100%,60%),hsl(360,100%,60%));}
+100%{background:linear-gradient(90deg,hsl(0,100%,60%),hsl(60,100%,60%),hsl(120,100%,60%));}
 }
 .boot-txt{color:rgba(255,255,255,.25);font-size:11px;margin-top:14px;letter-spacing:2px;}
 
@@ -392,6 +394,13 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 /* ── SCREEN DIMMER ── */
 #screen-dimmer{position:fixed;inset:0;background:transparent;pointer-events:none;z-index:9950;transition:background .25s;}
 #screen-dimmer.dim-active{pointer-events:auto;}
+#dim-panel{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(6px);background:rgba(10,12,24,.96);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 20px;display:none;align-items:center;gap:12px;z-index:9960;box-shadow:0 8px 32px rgba(0,0,0,.6);transition:transform .2s,opacity .2s;opacity:0;}
+#dim-panel.dim-show{display:flex;opacity:1;transform:translateX(-50%) translateY(0);}
+#dim-panel label{font-size:12px;color:rgba(255,255,255,.55);white-space:nowrap;}
+#dim-range{width:160px;accent-color:#60cdff;cursor:pointer;}
+#dim-val-txt{font-size:12px;color:rgba(255,255,255,.4);width:30px;text-align:right;}
+#dim-panel-close{color:rgba(255,255,255,.35);cursor:pointer;font-size:15px;margin-left:4px;padding:2px 5px;border-radius:5px;transition:background .12s;}
+#dim-panel-close:hover{background:rgba(196,43,28,.7);color:#fff;}
 </style>
 </head>
 <body>
@@ -492,8 +501,6 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="desk-icon" data-icon-id="icon-updates" style="top:16px;left:218px" ondblclick="openApp('updates')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🔔</div><span>Обновления</span></div>
 <div class="desk-icon" data-icon-id="icon-telegram" style="top:112px;left:218px" ondblclick="openTelegram()" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">📱</div><span>Exiblox Telegram</span></div>
 <div class="desk-icon" data-icon-id="icon-parkour" style="top:208px;left:218px" ondblclick="openApp('parkour')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🏃</div><span>Обби Паркур</span></div>
-<!-- ExibloxOGStore иконка -->
-<div class="desk-icon" data-icon-id="icon-ogstore" style="top:304px;left:218px" ondblclick="openExibloxOGStore()" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🛍️</div><span>ExibloxOGStore</span></div>
 </div>
 
 <!-- ═══ TASKBAR ══════════════════════════════════════ -->
@@ -516,7 +523,6 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="tb-btn" id="tb-updates" onclick="tbClick('updates')">🔔</div>
 <div class="tb-btn" id="tb-parkour" onclick="tbClick('parkour')">🏃</div>
 <div class="tb-btn" id="tb-exiblox" onclick="openExibloxApp()">🐍</div>
-<div class="tb-btn" id="tb-ogstore" onclick="openExibloxOGStore()">🛍️</div>
 </div>
 <div id="tb-right">
 <div class="tb-sys" onclick="toggleTray(event)"><span>📶</span><span>🔊</span><span>🔋</span></div>
@@ -546,7 +552,6 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="pin-app" onclick="openTelegram();hideAll()"><div class="ico">📱</div><div class="lbl">Telegram</div></div>
 <div class="pin-app" onclick="openApp('parkour');hideAll()"><div class="ico">🏃</div><div class="lbl">Обби Паркур</div></div>
 <div class="pin-app" onclick="openApp('gta6');hideAll()"><div class="ico">🎮</div><div class="lbl">GTA 6</div></div>
-<div class="pin-app" onclick="openExibloxOGStore();hideAll()"><div class="ico">🛍️</div><div class="lbl">OGStore</div></div>
 </div>
 </div>
 <div class="sm-sec">Рекомендуемые</div>
@@ -579,22 +584,10 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="tr-tile" id="tr-dark-theme" onclick="openWallpaperGallery('dark')"><div class="ico">🌑</div><div class="lbl">Тёмная</div></div>
 <div class="tr-tile" id="tr-sound" onclick="toggleTile('tr-sound','Звук')"><div class="ico">🔊</div><div class="lbl">Звук</div></div>
 <div class="tr-tile off" id="tr-focus" onclick="toggleTile('tr-focus','Фокус')"><div class="ico">🎯</div><div class="lbl">Фокус</div></div>
-<!-- Phone Version кнопка -->
-<div class="tr-tile off" id="tr-phone" onclick="loadPhoneVersion()"><div class="ico">📱</div><div class="lbl">Phone Ver</div></div>
+<div class="tr-tile off" id="tr-dim" onclick="toggleDimPanel()"><div class="ico">🌑</div><div class="lbl">Затемнение</div></div>
 </div>
-<!-- Яркость = управляет затемнением (инвертировано: 100% яркость = 0% затемнение) -->
-<div class="sl-row">
-  <span class="ico">🔆</span>
-  <input type="range" min="10" max="100" value="100" id="brightness-slider"
-    oninput="applyBrightnessAsDim(+this.value);el('bright-val').textContent=this.value+'%'">
-  <span class="sl-val" id="bright-val">100%</span>
-</div>
-<!-- Звук -->
-<div class="sl-row">
-  <span class="ico">🔊</span>
-  <input type="range" min="0" max="100" value="60" oninput="el('vol-val').textContent=this.value+'%'">
-  <span class="sl-val" id="vol-val">60%</span>
-</div>
+<div class="sl-row"><span class="ico">🔆</span><input type="range" min="10" max="100" value="85" oninput="el('bright-val').textContent=this.value+'%'"><span class="sl-val" id="bright-val">85%</span></div>
+<div class="sl-row"><span class="ico">🔊</span><input type="range" min="0" max="100" value="60" oninput="el('vol-val').textContent=this.value+'%'"><span class="sl-val" id="vol-val">60%</span></div>
 </div>
 
 <!-- ═══ WALLPAPER GALLERY ════════════════════════════ -->
@@ -822,7 +815,9 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="resize-handle" onmousedown="resizeWin(event,'win-updates')"></div>
 </div>
 
-<!-- ПАРКУР -->
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  🏃 ОББИ ПАРКУР — ПОЛНОЦЕННАЯ ИГРА                 ║
+     ╚══════════════════════════════════════════════════════╝ -->
 <div class="window" id="win-parkour" style="width:960px;height:640px;" onclick="bringFront('win-parkour')">
 <div class="titlebar" onmousedown="dragWin(event,'win-parkour')">
 <span class="tb-icon">🏃</span><span class="tb-title">Обби Паркур — Noob Runner</span>
@@ -852,18 +847,15 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="resize-handle" onmousedown="resizeWin(event,'win-exiblox')"></div>
 </div>
 
-<!-- ExibloxOGStore — ЗАГЛУШКА -->
-<div class="window" id="win-ogstore" style="width:860px;height:600px;" onclick="bringFront('win-ogstore')">
-<div class="titlebar" onmousedown="dragWin(event,'win-ogstore')">
-<span class="tb-icon">🛍️</span><span class="tb-title">ExibloxOGStore</span>
-<div class="win-btns"><div class="wb" onclick="minimizeWin('ogstore')">─</div><div class="wb" onclick="toggleMax('win-ogstore')">⬜</div><div class="wb cls" onclick="closeWin('ogstore')">✕</div></div>
-</div>
-<div class="win-body" style="overflow:hidden;padding:0;"><div id="exibloxogstore-root" style="height:100%;width:100%;"></div></div>
-<div class="resize-handle" onmousedown="resizeWin(event,'win-ogstore')"></div>
-</div>
-
 <div id="notif-stack"></div>
 <div id="screen-dimmer"></div>
+<div id="dim-panel">
+  <span style="font-size:16px">🌑</span>
+  <label>Затемнение</label>
+  <input type="range" id="dim-range" min="0" max="90" value="0" oninput="applyDim(+this.value)">
+  <span id="dim-val-txt">0%</span>
+  <div id="dim-panel-close" onclick="hideDimPanel()">✕</div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════
      MAIN ENGINE SCRIPT
@@ -873,7 +865,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 const el=id=>document.getElementById(id);
 let winZ=100;
 
-// ── BLUE SHIMMER LOGO BUILDER ──────────────────────────
+// ── RAINBOW LOGO BUILDER ────────────────────────────────
 function buildRainbowText(text,container){
  container.innerHTML='';
  [...text].forEach((ch,i)=>{
@@ -885,8 +877,10 @@ function buildRainbowText(text,container){
  });
 }
 
+// Build all rainbow logos on page
 buildRainbowText('Exiblox Official✦', el('boot-logo'));
 buildRainbowText('Exiblox✦', el('reg-logo-el'));
+// Taskbar start button
 (function(){
  const btn=el('tb-start-logo')||el('start-btn');
  if(btn){
@@ -901,8 +895,11 @@ setTimeout(()=>{
  setTimeout(()=>{b.style.display='none';checkUser();},600);
 },2700);
 
-// ── SYNC ────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// CROSS-DEVICE ACCOUNT SYNC
+// ══════════════════════════════════════════════════════
 function encodeSyncCode(userObj){
+ // encode user data as base64 with version prefix
  const payload={v:1,data:userObj,ts:Date.now()};
  try{return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));}catch(e){return null;}
 }
@@ -965,7 +962,10 @@ window.doRegister=function(){
  localStorage.setItem('exiwin_user',JSON.stringify(user));
  el('regscreen').style.display='none';
  showLock(user);
- setTimeout(()=>{showNotif('Аккаунт создан!','Получи синк-код для входа с других устройств','📱');},1500);
+ // Auto-show sync code after register
+ setTimeout(()=>{
+  showNotif('Аккаунт создан!','Получи синк-код для входа с других устройств','📱');
+ },1500);
 };
 window.showLogin=function(){
  el('reg-box').style.display='none';el('sync-import-box').style.display='none';el('login-box').style.display='block';
@@ -992,7 +992,7 @@ function enterDesktop(user){
  loadIconPositions();loadSavedWallpaper();startClock();
 }
 
-// ── CLOCK ────────────────────────────────────────────────
+// ── CLOCK ───────────────────────────────────────────────
 function updateClock(){
  const now=new Date();
  const t=now.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'});
@@ -1007,6 +1007,7 @@ function updateClock(){
 }
 function startClock(){updateClock();setInterval(updateClock,10000);}
 
+// ── CENTERING ───────────────────────────────────────────
 function centerWindow(w){
  if(!w||w.classList.contains('maximized'))return;
  const vw=window.innerWidth,vh=window.innerHeight-48;
@@ -1016,7 +1017,7 @@ function centerWindow(w){
  w.style.top=Math.max(0,Math.round((vh-wh)/2))+'px';
 }
 
-// ── WINDOW MANAGEMENT ────────────────────────────────────
+// ── WINDOW MANAGEMENT ───────────────────────────────────
 window.bringFront=function(id){const w=el(id);if(w)w.style.zIndex=++winZ;};
 window.openApp=function(app){
  if(app==='gta6'){openGta6();return;}
@@ -1036,7 +1037,7 @@ window.minimizeWin=function(app){const w=el('win-'+app);if(w)w.style.display='no
 window.toggleMax=function(id){const w=el(id);if(w)w.classList.toggle('maximized');};
 window.tbClick=function(app){const w=el('win-'+app);if(!w)return;if(!w.style.display||w.style.display==='none')openApp(app);else bringFront('win-'+app);};
 
-// ── DRAG & RESIZE ────────────────────────────────────────
+// ── DRAG & RESIZE ───────────────────────────────────────
 window.dragWin=function(e,id){
  if(e.target.closest('.win-btns'))return;
  const w=el(id);if(!w||w.classList.contains('maximized'))return;
@@ -1053,7 +1054,7 @@ window.resizeWin=function(e,id){
  document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
 };
 
-// ── MENUS ────────────────────────────────────────────────
+// ── MENUS ───────────────────────────────────────────────
 window.toggleStart=function(e){e&&e.stopPropagation();const m=el('start-menu');if(m.style.display==='flex'){m.style.display='none';m.classList.remove('show');}else{hideAll();m.style.display='flex';setTimeout(()=>m.classList.add('show'),10);}};
 window.hideAll=function(){const m=el('start-menu');m.style.display='none';m.classList.remove('show');el('tray-popup').style.display='none';el('ctx-menu').style.display='none';};
 window.toggleTray=function(e){e&&e.stopPropagation();const t=el('tray-popup');t.style.display=t.style.display==='block'?'none':'block';};
@@ -1070,7 +1071,7 @@ window.selectIcon=function(el){document.querySelectorAll('.desk-icon').forEach(i
 window.toggleTile=function(id,name){const t=el(id);t.classList.toggle('off');showNotif(name,t.classList.contains('off')?'Выключено':'Включено','⚡');};
 window.toggleNightMode=function(){document.body.style.filter=document.body.style.filter?'':'sepia(0.3) brightness(0.8)';el('tr-night').classList.toggle('off');};
 
-// ── NOTIFICATIONS ─────────────────────────────────────────
+// ── NOTIFICATIONS ────────────────────────────────────────
 window.showNotif=function(title,desc,icon){
  const s=el('notif-stack');
  const d=document.createElement('div');d.className='notif';
@@ -1078,12 +1079,12 @@ window.showNotif=function(title,desc,icon){
  s.appendChild(d);setTimeout(()=>d.remove(),5000);
 };
 
-// ── LOCK/POWER ────────────────────────────────────────────
+// ── LOCK/POWER ───────────────────────────────────────────
 window.lockScreen=function(){hideAll();el('lockscreen').style.display='flex';el('lockscreen').onclick=()=>el('lockscreen').style.display='none';};
 window.reboot=function(){location.reload();};
 window.shutdown=function(){document.body.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#000;color:#333;gap:16px;"><div style="font-size:48px">⏻</div><div style="font-size:18px">ExiWin выключен</div></div>';};
 
-// ── SETTINGS ──────────────────────────────────────────────
+// ── SETTINGS ─────────────────────────────────────────────
 window.setPage=function(page){
  document.querySelectorAll('.set-page').forEach(p=>p.classList.remove('active'));
  document.querySelectorAll('.set-side-item').forEach(s=>s.classList.remove('active'));
@@ -1091,7 +1092,7 @@ window.setPage=function(page){
  document.querySelectorAll('.set-side-item').forEach(s=>{if(s.dataset.page===page)s.classList.add('active');});
 };
 
-// ── EXPLORER ──────────────────────────────────────────────
+// ── EXPLORER ─────────────────────────────────────────────
 const fileSystem={
  'Рабочий стол':[{n:'Заметки.txt',i:'📝'},{n:'Фото.png',i:'🖼️'},{n:'Проект',i:'📁',f:true}],
  'Документы':[{n:'Отчёт.docx',i:'📄'},{n:'Резюме.pdf',i:'📋'}],
@@ -1130,11 +1131,20 @@ window.brNewTab=function(){el('br-newtab').style.display='flex';el('br-frame').s
 
 // ── PAINT ─────────────────────────────────────────────────
 let paintCanvas,paintCtx,paintColor='#0078d4',paintSize=4,paintTool='pen',painting=false;
+function initPaint(){
+ paintCanvas=el('paint-canvas');if(!paintCanvas)return;
+ const wrap=el('paint-canvas-wrap');
+ paintCanvas.width=wrap.clientWidth||700;paintCanvas.height=wrap.clientHeight||400;
+ paintCtx=paintCanvas.getContext('2d');paintCtx.fillStyle='#fff';paintCtx.fillRect(0,0,paintCanvas.width,paintCanvas.height);
+ paintCanvas.onmousedown=e=>{painting=true;paintCtx.beginPath();paintCtx.moveTo(e.offsetX,e.offsetY);};
+ paintCanvas.onmousemove=e=>{if(!painting)return;paintCtx.lineWidth=paintSize;paintCtx.lineCap='round';paintCtx.strokeStyle=paintTool==='eraser'?'#fff':paintColor;paintCtx.lineTo(e.offsetX,e.offsetY);paintCtx.stroke();};
+ paintCanvas.onmouseup=()=>painting=false;paintCanvas.onmouseleave=()=>painting=false;
+}
 
-// ── TASK MANAGER ──────────────────────────────────────────
+// ── TASK MANAGER ─────────────────────────────────────────
 function renderTaskMan(){
  const c=el('tm-body-content');if(!c)return;
- const apps=['ExiWin Shell','Exian.AI','Edge','Paint','Проводник','Обби Паркур','GTA 6','Exiblox v3','ExibloxOGStore'];
+ const apps=['ExiWin Shell','Exian.AI','Edge','Paint','Проводник','Обби Паркур','GTA 6','Exiblox v3'];
  let h='<table class="tm-table"><thead><tr><th>Процесс</th><th>ЦП</th><th>ОЗУ</th><th>PID</th></tr></thead><tbody>';
  apps.forEach((a,i)=>{const cpu=(Math.random()*15).toFixed(1),ram=(Math.random()*200+20).toFixed(0);h+=`<tr><td>${a}</td><td>${cpu}%</td><td>${ram} МБ</td><td>${1000+i*137}</td></tr>`;});
  h+='</tbody></table>';c.innerHTML=h;
@@ -1149,7 +1159,7 @@ const aiKnowledge={
  'python':['```python\nclass Calc:\n    def add(self,a,b):return a+b\n    def mul(self,a,b):return a*b\nc=Calc()\nprint(c.add(5,3))  # 8\n```'],
  'анекдот':['Программист спрашивает: «Почему мой код не работает?» — «Потому что ты его написал!» 😂','— Сколько программистов нужно, чтобы вкрутить лампочку?\n— Ни одного, это проблема железа! 💡'],
  'идея':['💡 Идеи для проектов:\n1. AI-бот для Telegram\n2. Игра на Canvas\n3. Трекер привычек\n4. Чат-приложение\n5. Генератор мемов'],
- 'exiblox':['Exiblox Official — игровая платформа нового поколения! 🐍\n• Exiblox v3 в ExiWin\n• Обби Паркур с чекпоинтами\n• GTA 6 в браузере\n• Exian.AI 3.0\n• ExibloxOGStore 🛍️'],
+ 'exiblox':['Exiblox Official — игровая платформа нового поколения! 🐍\n• Exiblox v3 в ExiWin\n• Обби Паркур с чекпоинтами\n• GTA 6 в браузере\n• Exian.AI 3.0'],
 };
 function aiResponse(msg){
  const m=msg.toLowerCase();
@@ -1185,14 +1195,14 @@ function renderUpdates(){
  const c=el('updates-content');if(!c)return;
  c.innerHTML=`<div class="updates-header"><span style="font-size:32px">🔔</span><h2>Обновления ExiWin 12</h2></div>
   <div class="update-item">
-   <div class="update-ver">📦 Версия 3.1.0</div><div class="update-date">Март 2026</div>
-   <div class="update-desc">• 💙 Сине-белая анимация загрузки<br>• 🔆 Затемнение через слайдер яркости<br>• 📱 Кнопка Phone Version в трее<br>• 🛍️ ExibloxOGStore — новое приложение</div>
-   <span class="update-tag tag-new">Новое</span><span class="update-tag tag-improve">Улучшение</span>
+   <div class="update-ver">📦 Версия 3.0.0</div><div class="update-date">Февраль 2026</div>
+   <div class="update-desc">• 🌈 Радужный логотип «Exiblox Official✦»<br>• 📱 Кросс-девайс синхронизация аккаунта<br>• 🏃 Полный рерол Обби Паркура — небо, чекпоинты, 3 сложности<br>• 🐍 Exiblox.js загрузка исправлена</div>
+   <span class="update-tag tag-new">Новое</span><span class="update-tag tag-fix">Исправления</span>
   </div>
   <div class="update-item">
-   <div class="update-ver">📦 Версия 3.0.0</div><div class="update-date">Февраль 2026</div>
-   <div class="update-desc">• 🌈 Радужный логотип «Exiblox Official✦»<br>• 📱 Кросс-девайс синхронизация аккаунта<br>• 🏃 Полный рерол Обби Паркура<br>• 🐍 Exiblox.js загрузка исправлена</div>
-   <span class="update-tag tag-new">Новое</span><span class="update-tag tag-fix">Исправления</span>
+   <div class="update-ver">📦 Версия 2.5.0</div><div class="update-date">17 февраля 2026</div>
+   <div class="update-desc">• Центрирование окон<br>• Сохранение обоев и позиций иконок<br>• Exiblox интеграция</div>
+   <span class="update-tag tag-improve">Улучшение</span>
   </div>`;
 }
 
@@ -1231,6 +1241,55 @@ const WALLPAPERS={
   {id:'d7',name:'Пурпур',css:'linear-gradient(135deg,#0d0020,#1a0035 50%,#08001a)'},
   {id:'d8',name:'Северное сияние',css:'linear-gradient(135deg,#0a2a1a 0%,#0d4a2a 25%,#0a2a3a 50%,#0d1a4a 75%,#1a0a3a 100%)'},
   {id:'d9',name:'Чёрная дыра',css:'radial-gradient(circle at 40% 40%,#000000 0%,#0a0010 35%,#1a0030 60%,#000008 100%)'},
+  {id:'d10',name:'Ночной город',css:'linear-gradient(180deg,#000510 0%,#050a1a 40%,#0a0f25 70%,#050810 100%)'},
+  {id:'d11',name:'Киберпанк',css:'linear-gradient(135deg,#0a0015 0%,#150030 30%,#001530 60%,#003015 100%)'},
+  {id:'d12',name:'Марс',css:'radial-gradient(ellipse at 50% 70%,#3d1a00 0%,#1a0800 40%,#080000 100%)'},
+  {id:'d13',name:'Шторм',css:'linear-gradient(160deg,#060610 0%,#0e0e20 35%,#080815 65%,#040408 100%)'},
+  {id:'d14',name:'Нефть',css:'conic-gradient(from 180deg at 50% 80%,#000000 0deg,#050510 60deg,#0a0518 120deg,#050010 180deg,#000000 360deg)'},
+  {id:'d15',name:'Тёмный лес',css:'linear-gradient(180deg,#000800 0%,#011202 40%,#020f02 70%,#000500 100%)'},
+  {id:'d16',name:'Астероид',css:'radial-gradient(ellipse at 20% 30%,#1a1000 0%,#0a0800 40%,#000000 100%)'},
+  {id:'d17',name:'Призма',css:'linear-gradient(135deg,#100010 0%,#001010 25%,#100000 50%,#001010 75%,#100010 100%)'},
+  {id:'d18',name:'Бездна',css:'radial-gradient(circle at 50% 100%,#000000 0%,#000010 50%,#000005 100%)'},
+  {id:'d19',name:'Тёмный янтарь',css:'linear-gradient(160deg,#150800 0%,#240d00 40%,#120600 100%)'},
+  {id:'d20',name:'Полночь',css:'linear-gradient(200deg,#000008 0%,#00000f 35%,#000008 70%,#000003 100%)'},
+  {id:'d21',name:'Вулкан 2',css:'radial-gradient(ellipse at 50% 100%,#2a0800 0%,#150300 40%,#000000 100%)'},
+  {id:'d22',name:'Тёмный океан',css:'linear-gradient(180deg,#000a10 0%,#001020 40%,#001828 70%,#000810 100%)'},
+  {id:'d23',name:'Радиация',css:'radial-gradient(ellipse at 50% 50%,#001a00 0%,#000d00 50%,#000000 100%)'},
+  {id:'c01',name:'🌌 Млечный путь',css:'radial-gradient(ellipse at 50% 60%,#1a0a2e 0%,#0d051a 40%,#000005 100%)'},
+  {id:'c02',name:'🌌 Туманность Орёл',css:'radial-gradient(ellipse at 30% 40%,#0d1a3a 0%,#1a0a2e 35%,#000510 70%,#000003 100%)'},
+  {id:'c03',name:'🔵 Голубой гигант',css:'radial-gradient(circle at 40% 35%,#001040 0%,#000820 50%,#000005 100%)'},
+  {id:'c04',name:'🟣 Туманность Криль',css:'radial-gradient(ellipse at 60% 50%,#200a3a 0%,#0f0520 50%,#000003 100%)'},
+  {id:'c05',name:'🌠 Звёздное поле',css:'linear-gradient(160deg,#000008 0%,#050010 30%,#000510 60%,#000008 100%)'},
+  {id:'c06',name:'☀️ Солнечный ветер',css:'radial-gradient(ellipse at 20% 30%,#1a0800 0%,#280d00 30%,#0a0400 60%,#000000 100%)'},
+  {id:'c07',name:'🌑 Тёмная материя',css:'linear-gradient(135deg,#000000 0%,#020005 25%,#000200 50%,#050002 75%,#000000 100%)'},
+  {id:'c08',name:'💫 Пульсар',css:'radial-gradient(circle at 50% 50%,#0a001a 0%,#000a1a 40%,#000000 100%)'},
+  {id:'c09',name:'🔴 Красный карлик',css:'radial-gradient(ellipse at 45% 45%,#1a0300 0%,#0d0100 50%,#000000 100%)'},
+  {id:'c10',name:'🌊 Космический риф',css:'linear-gradient(160deg,#000a14 0%,#001520 35%,#000a10 65%,#000508 100%)'},
+  {id:'c11',name:'⚡ Нейтронная звезда',css:'radial-gradient(circle at 50% 30%,#1a1a00 0%,#0d0d00 40%,#000000 100%)'},
+  {id:'c12',name:'🌀 Галактика M87',css:'conic-gradient(from 0deg at 50% 50%,#000000 0deg,#050010 60deg,#0a0005 120deg,#000010 180deg,#000000 240deg,#050005 300deg,#000000 360deg)'},
+  {id:'c13',name:'🔮 Квазар',css:'radial-gradient(ellipse at 50% 50%,#100020 0%,#080010 40%,#000003 70%,#000000 100%)'},
+  {id:'c14',name:'🌌 Андромеда',css:'radial-gradient(ellipse at 55% 55%,#0a0a1e 0%,#050510 40%,#000005 100%)'},
+  {id:'c15',name:'💥 Сверхновая',css:'radial-gradient(circle at 50% 50%,#200800 0%,#140400 30%,#060001 60%,#000000 100%)'},
+  {id:'c16',name:'🌙 Лунная пыль',css:'linear-gradient(200deg,#0a0a0a 0%,#141414 40%,#0a0a0a 100%)'},
+  {id:'c17',name:'🟤 Коричневый карлик',css:'radial-gradient(ellipse at 40% 60%,#150800 0%,#0a0400 45%,#000000 100%)'},
+  {id:'c18',name:'🔵 Белый карлик',css:'radial-gradient(circle at 50% 40%,#050510 0%,#020208 45%,#000000 100%)'},
+  {id:'c19',name:'🌌 Конская Голова',css:'linear-gradient(160deg,#050008 0%,#0a0015 30%,#050008 60%,#000003 100%)'},
+  {id:'c20',name:'⭐ Плеяды',css:'radial-gradient(ellipse at 70% 30%,#080815 0%,#040410 50%,#000000 100%)'},
+  {id:'c21',name:'🟣 Крабовидная',css:'radial-gradient(ellipse at 50% 40%,#150015 0%,#0a000a 45%,#000000 100%)'},
+  {id:'c22',name:'🌊 Кошачий глаз',css:'radial-gradient(circle at 50% 50%,#001414 0%,#000a0a 45%,#000000 100%)'},
+  {id:'c23',name:'💫 Аккреционный диск',css:'conic-gradient(from 90deg at 50% 50%,#200800 0deg,#000000 40deg,#150500 80deg,#000000 120deg,#200800 160deg,#000000 200deg,#100300 240deg,#000000 280deg,#200800 320deg,#000000 360deg)'},
+  {id:'c24',name:'🌌 Скопление Геркулес',css:'radial-gradient(ellipse at 50% 50%,#060610 0%,#030308 50%,#000000 100%)'},
+  {id:'c25',name:'🔴 Марс',css:'radial-gradient(circle at 40% 40%,#1a0800 0%,#120500 40%,#030000 100%)'},
+  {id:'c26',name:'🟣 Магнетар',css:'radial-gradient(ellipse at 30% 70%,#1a0028 0%,#0d0018 45%,#000000 100%)'},
+  {id:'c27',name:'💙 Аврора в космосе',css:'linear-gradient(170deg,#000800 0%,#001800 25%,#001a10 50%,#000a08 75%,#000000 100%)'},
+  {id:'c28',name:'🌌 Поле Хаббл',css:'linear-gradient(145deg,#000000 0%,#030008 25%,#000005 50%,#050003 75%,#000000 100%)'},
+  {id:'c29',name:'⚫ Горизонт событий',css:'radial-gradient(circle at 50% 50%,#000000 0%,#000000 20%,#050005 45%,#020008 65%,#000000 100%)'},
+  {id:'c30',name:'🌠 Персеиды',css:'linear-gradient(160deg,#000005 0%,#020010 40%,#000008 100%)'},
+  {id:'c31',name:'🟡 Туманность Бабочка',css:'radial-gradient(ellipse at 50% 50%,#141400 0%,#0a0a00 45%,#000000 100%)'},
+  {id:'c32',name:'🌌 Межзвёздное',css:'linear-gradient(180deg,#000000 0%,#010005 20%,#000000 40%,#030002 60%,#000000 100%)'},
+  {id:'c33',name:'💜 Туманность Розетка',css:'radial-gradient(ellipse at 50% 50%,#1a0018 0%,#0d000d 40%,#000000 100%)'},
+  {id:'c34',name:'🔵 Нептун',css:'radial-gradient(circle at 45% 45%,#000a18 0%,#000510 50%,#000000 100%)'},
+  {id:'c35',name:'🌌 Центр галактики',css:'radial-gradient(ellipse at 50% 50%,#1a0a00 0%,#100500 30%,#040000 60%,#000000 100%)'},
  ],
  light:[
   {id:'l0',name:'Sky Blue',css:'linear-gradient(160deg,#dceeff,#eef4fb 40%,#d8eaf5)',def:true},
@@ -1238,12 +1297,39 @@ const WALLPAPERS={
   {id:'l2',name:'Мята',css:'linear-gradient(160deg,#e0fff4,#ccf5e8 50%,#d8fff0)'},
   {id:'l3',name:'Лаванда',css:'linear-gradient(160deg,#f0e6ff,#e8d5ff 50%,#eeddff)'},
   {id:'l4',name:'Аква',css:'linear-gradient(160deg,#d6f8ff,#b8f0ff 50%,#c8f4ff)'},
+  {id:'l5',name:'Рассвет',css:'linear-gradient(160deg,#ffe0f0 0%,#ffd0e8 30%,#ffecd0 60%,#fff5e0 100%)'},
+  {id:'l6',name:'Луг',css:'linear-gradient(180deg,#d0f0ff 0%,#e8f8f0 40%,#d8f5dc 100%)'},
+  {id:'l7',name:'Ваниль',css:'linear-gradient(135deg,#fffbe6 0%,#fff8d0 50%,#fffadc 100%)'},
+  {id:'l8',name:'Сакура',css:'linear-gradient(160deg,#ffe4f0 0%,#ffd6e8 40%,#fff0e8 100%)'},
+  {id:'l9',name:'Полдень',css:'linear-gradient(180deg,#c8e8ff 0%,#ddf0ff 35%,#eef8ff 70%,#f5fbff 100%)'},
+  {id:'l10',name:'Коралл',css:'linear-gradient(135deg,#ffe5d0 0%,#ffd0c0 40%,#ffe8d8 100%)'},
+  {id:'l11',name:'Кремовый',css:'linear-gradient(160deg,#fffaf0 0%,#fff5e8 40%,#fffbf0 100%)'},
+  {id:'l12',name:'Золотой час',css:'linear-gradient(160deg,#fff0c0 0%,#ffe8a0 30%,#fff5d0 60%,#fffae0 100%)'},
+  {id:'l13',name:'Арктика',css:'linear-gradient(180deg,#e8f8ff 0%,#d8f0f8 40%,#c8e8f5 100%)'},
+  {id:'l14',name:'Розовый туман',css:'radial-gradient(ellipse at 40% 40%,#ffe8f5 0%,#ffd8ee 50%,#fff0f8 100%)'},
+  {id:'l15',name:'Белый мрамор',css:'linear-gradient(135deg,#ffffff 0%,#f5f5f5 30%,#efefef 60%,#fafafa 100%)'},
+  {id:'l16',name:'Снег',css:'linear-gradient(180deg,#f0f8ff 0%,#e8f4ff 40%,#f5faff 100%)'},
+  {id:'l17',name:'Облака',css:'radial-gradient(ellipse at 30% 30%,#ffffff 0%,#f0f5ff 40%,#e8f0ff 100%)'},
+  {id:'l18',name:'Молоко',css:'linear-gradient(160deg,#fffffe 0%,#fafaf8 40%,#fffff8 100%)'},
+  {id:'l19',name:'Белый коралл',css:'linear-gradient(135deg,#fff8f5 0%,#fff0ed 40%,#fff8f5 100%)'},
+  {id:'l20',name:'Туман',css:'linear-gradient(160deg,#f8f8ff 0%,#f0f0fa 40%,#f5f5ff 100%)'},
  ],
  nature:[
   {id:'n01',name:'🌲 Хвойный лес',css:'linear-gradient(180deg,#2d6e3a 0%,#1e5228 30%,#173d1e 60%,#0e2812 100%)'},
   {id:'n02',name:'🌴 Джунгли',css:'linear-gradient(180deg,#0a2e10 0%,#1a5a1e 25%,#1e6a22 50%,#124018 75%,#081808 100%)'},
   {id:'n03',name:'🌻 Солнечная поляна',css:'linear-gradient(180deg,#87ceeb 0%,#a8ddf0 28%,#c8eed8 48%,#8ec86a 68%,#6aaa48 100%)'},
   {id:'n04',name:'🏡 Домик на закате',css:'linear-gradient(180deg,#e8600a 0%,#f07820 18%,#f8a840 36%,#ffd080 54%,#d0eea0 72%,#90cc70 100%)'},
+  {id:'n05',name:'⛅ Дневные облака',css:'linear-gradient(180deg,#3890cc 0%,#60aae0 22%,#90ccf0 44%,#c0e4f8 64%,#e8f4ff 82%,#ffffff 100%)'},
+  {id:'n06',name:'🌾 Пшеничное поле',css:'linear-gradient(180deg,#70b8d8 0%,#90cce8 28%,#f0e060 52%,#d8c040 70%,#c0a030 100%)'},
+  {id:'n07',name:'🌸 Цветущий сад',css:'linear-gradient(160deg,#ffd0f0 0%,#ffb8e8 20%,#ffd898 42%,#f8eca0 62%,#c0e8a0 80%,#98d878 100%)'},
+  {id:'n08',name:'🏔️ Горы со снегом',css:'linear-gradient(180deg,#5898c8 0%,#78b0e0 22%,#a8ccf0 42%,#c8d8e0 58%,#b8b8b0 74%,#989890 100%)'},
+  {id:'n09',name:'🌅 Морской закат',css:'linear-gradient(180deg,#183278 0%,#4840a0 18%,#a04878 36%,#d86848 52%,#e89838 66%,#f8d050 80%,#ffe878 100%)'},
+  {id:'n10',name:'🌊 Тропический океан',css:'linear-gradient(180deg,#80c8e8 0%,#58b0d8 22%,#2890c0 44%,#1070a8 64%,#084888 100%)'},
+  {id:'n11',name:'🌿 Бамбуковый лес',css:'linear-gradient(160deg,#1a4a1a 0%,#2a6a2a 28%,#388a38 52%,#2a7a2a 74%,#1a4a1a 100%)'},
+  {id:'n12',name:'❄️ Зимний лес',css:'linear-gradient(180deg,#a8ccec 0%,#c8e0f4 22%,#e0eef8 42%,#f0f8ff 58%,#d8e8ec 76%,#b8d0d0 100%)'},
+  {id:'n13',name:'🌄 Туманное утро',css:'linear-gradient(180deg,#6888a8 0%,#90a8c8 22%,#b8cce0 42%,#d0e0ee 58%,#e0eef6 76%,#f0f8ff 100%)'},
+  {id:'n14',name:'🍂 Осенний лес',css:'linear-gradient(160deg,#b03810 0%,#d05818 22%,#d87828 42%,#c89030 62%,#a87018 80%,#885010 100%)'},
+  {id:'n15',name:'🌈 После дождя',css:'linear-gradient(160deg,#90b8d8 0%,#b0d0ec 22%,#c8e4f4 42%,#d8f0e0 60%,#e8f8d8 78%,#f4fce8 100%)'},
  ]
 };
 let curWpTab='dark',curWpId={dark:'d0',light:'l0',nature:'n03'};
@@ -1287,112 +1373,28 @@ function loadSavedWallpaper(){
  }catch(e){}
 }
 
-// ══════════════════════════════════════════
-// DIMMER — управляется слайдером яркости
-// 100% яркость = 0% затемнение
-// 10% яркость = 90% затемнение
-// ══════════════════════════════════════════
+/* ── DIMMER ── */
 window.applyDim=function(v){
  const d=el('screen-dimmer');
- if(d){
-  d.style.background='rgba(0,0,0,'+(v/100)+')';
-  d.classList.toggle('dim-active',v>0);
- }
+ if(d){d.style.background='rgba(0,0,0,'+(v/100)+')';d.classList.toggle('dim-active',v>0);}
+ const t=el('dim-val-txt');if(t)t.textContent=v+'%';
+ const r=el('dim-range');if(r)r.value=v;
  localStorage.setItem('exiwin_dim',v);
 };
-
-// Brightness slider → dim (inverted)
-window.applyBrightnessAsDim=function(brightnessValue){
- // brightness 100 → dim 0%, brightness 10 → dim 90%
- const dimValue=Math.round(100-brightnessValue);
- applyDim(dimValue);
+window.toggleDimPanel=function(){
+ const p=el('dim-panel');
+ if(!p)return;
+ const show=!p.classList.contains('dim-show');
+ p.style.display='flex';
+ setTimeout(()=>p.classList.toggle('dim-show',show),10);
+ el('tr-dim').classList.toggle('off',!show);
 };
-
+window.hideDimPanel=function(){
+ const p=el('dim-panel');if(p)p.classList.remove('dim-show');
+ el('tr-dim').classList.add('off');
+};
 // Restore dim on load
-(function(){
- try{
-  const sv=localStorage.getItem('exiwin_dim');
-  if(sv&&+sv>0){
-   setTimeout(()=>{
-    applyDim(+sv);
-    // Sync slider position
-    const slider=el('brightness-slider');
-    if(slider){
-     slider.value=100-(+sv);
-     const brightVal=el('bright-val');
-     if(brightVal)brightVal.textContent=(100-(+sv))+'%';
-    }
-   },300);
-  }
- }catch(e){}
-})();
-
-// ══════════════════════════════════════════
-// PHONE VERSION
-// ══════════════════════════════════════════
-window.loadPhoneVersion=function(){
- const tile=el('tr-phone');
- if(tile)tile.classList.toggle('off');
- // Проверяем если phone.js уже загружен
- if(typeof initPhoneVersion!=='undefined'){
-  if(typeof initPhoneVersion==='function')initPhoneVersion();
-  showNotif('Phone Version','Телефонная версия запущена 📱','📱');
-  return;
- }
- const script=document.createElement('script');
- script.src='phone.js';
- script.onload=function(){
-  showNotif('Phone Version','phone.js загружен! 📱','✅');
-  if(typeof initPhoneVersion==='function')initPhoneVersion();
- };
- script.onerror=function(){
-  showNotif('Phone Version','phone.js не найден рядом с index.html','❌');
-  if(tile)tile.classList.add('off');
- };
- document.body.appendChild(script);
-};
-
-// ══════════════════════════════════════════
-// ExibloxOGStore
-// ══════════════════════════════════════════
-window.openExibloxOGStore=function(){
- const win=el('win-ogstore');
- if(win){
-  win.style.display='flex';
-  requestAnimationFrame(()=>{centerWindow(win);bringFront('win-ogstore');});
-  const tb=el('tb-ogstore');if(tb)tb.classList.add('running','active-win');
- }
- // Загружаем ExibloxOGStore.js если ещё не загружен
- if(typeof initExibloxOGStore==='undefined'){
-  const root=el('exibloxogstore-root');
-  if(root)root.innerHTML=`
-   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:linear-gradient(160deg,#08040f,#0d0620,#060410);gap:16px;">
-    <div style="font-size:42px;font-weight:900;background:linear-gradient(135deg,#a000ff,#ff00cc,#00b2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 2s ease infinite;">✦ ExibloxOGStore</div>
-    <div style="color:rgba(255,255,255,.4);font-size:13px;">⏳ Загрузка магазина...</div>
-    <style>@keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4) drop-shadow(0 0 20px rgba(160,0,255,.6))}}</style>
-   </div>`;
-  const script=document.createElement('script');
-  script.src='ExibloxOGStore.js';
-  script.onload=function(){
-   if(typeof initExibloxOGStore==='function')initExibloxOGStore();
-  };
-  script.onerror=function(){
-   showNotif('ExibloxOGStore','ExibloxOGStore.js не найден','❌');
-   const r=el('exibloxogstore-root');
-   if(r)r.innerHTML=`
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:#0d0620;gap:12px;text-align:center;padding:20px;">
-     <div style="font-size:48px;">🛍️</div>
-     <div style="color:#ff6b6b;font-size:16px;">ExibloxOGStore.js не найден</div>
-     <div style="color:rgba(255,255,255,.4);font-size:12px;max-width:360px;line-height:1.6;">Положи <b style="color:#a000ff">ExibloxOGStore.js</b> рядом с <b style="color:#a000ff">index.html</b></div>
-     <button onclick="openExibloxOGStore()" style="background:linear-gradient(135deg,#a000ff,#7c3aed);border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;margin-top:8px;">🔄 Повтор</button>
-    </div>`;
-  };
-  document.body.appendChild(script);
- }else if(typeof initExibloxOGStore==='function'){
-  initExibloxOGStore();
- }
- hideAll();
-};
+(function(){try{const sv=localStorage.getItem('exiwin_dim');if(sv&&+sv>0)setTimeout(()=>applyDim(+sv),300);}catch(e){}})();
 
 // ── EXIBLOX ───────────────────────────────────────────────
 window.openExibloxApp=function(){
@@ -1403,19 +1405,18 @@ window.openExibloxApp=function(){
   if(root)root.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:#0a0c14;gap:16px;"><div style="font-size:42px;font-weight:900;background:linear-gradient(135deg,#00b2ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">✦ Exiblox v3</div><div style="color:rgba(255,255,255,.4);font-size:13px;">⏳ Загрузка...</div></div>`;
   const script=document.createElement('script');script.src='exiblox.js';
   script.onload=()=>{if(typeof initExiblox==='function')initExiblox();};
-  script.onerror=()=>{showNotif('Exiblox','exiblox.js не найден рядом с index.html','❌');const r=el('exiblox-root');if(r)r.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:#0a0c14;gap:12px;padding:20px;text-align:center;"><div style="font-size:48px">❌</div><div style="color:#ff6b6b;font-size:16px">exiblox.js не найден</div><button onclick="openExibloxApp()" style="background:#0078d4;border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;margin-top:8px;">🔄 Повтор</button></div>`;};
+  script.onerror=()=>{showNotif('Exiblox','exiblox.js не найден рядом с index.html','❌');const r=el('exiblox-root');if(r)r.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:#0a0c14;gap:12px;padding:20px;text-align:center;"><div style="font-size:48px">❌</div><div style="color:#ff6b6b;font-size:16px">exiblox.js не найден</div><div style="color:rgba(255,255,255,.4);font-size:12px;max-width:360px;line-height:1.6;">Положи <b style="color:#00b2ff">exiblox.js</b> рядом с <b style="color:#00b2ff">index.html</b></div><button onclick="openExibloxApp()" style="background:#0078d4;border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;margin-top:8px;">🔄 Повтор</button></div>`;};
   document.body.appendChild(script);
  }else if(typeof initExiblox==='function')initExiblox();
  hideAll();
 };
 
 window.smSearch=function(){};
+window.openTelegram=function(){window.open('https://t.me/exiblox','_blank');showNotif('Telegram','Открыто в новой вкладке','📱');};
 
-window.addEventListener('DOMContentLoaded',()=>{
- const h=new Date().getHours(),g=el('br-hello');
- if(g)g.textContent=h<6?'Доброй ночи!':h<12?'Доброе утро!':h<18?'Добрый день!':'Добрый вечер!';
-});
+window.addEventListener('DOMContentLoaded',()=>{const h=new Date().getHours(),g=el('br-hello');if(g)g.textContent=h<6?'Доброй ночи!':h<12?'Доброе утро!':h<18?'Добрый день!':'Добрый вечер!';});
 </script>
+
 
 <!-- ══════════════════════════════════════════════════════
      🏃 ОББИ ПАРКУР — Three.js
@@ -1549,6 +1550,7 @@ window.PARKOUR = (function(){
   _root.innerHTML = '';
   _root.style.cssText = 'position:relative;overflow:hidden;background:#87CEEB;';
 
+  // HUD
   _hudDiv = document.createElement('div');
   _hudDiv.style.cssText = 'position:absolute;top:10px;left:10px;color:#fff;text-shadow:1px 1px 4px #000;font-size:13px;font-family:Segoe UI,sans-serif;z-index:10;pointer-events:none;';
   _hudDiv.innerHTML = '⭐ Чекпоинт: 0 / 10 &nbsp;|&nbsp; WASD/стрелки — движение &nbsp;·&nbsp; Пробел — прыжок';
@@ -1625,8 +1627,9 @@ window.parkourClose = function(){
 };
 </script>
 
+
 <!-- ══════════════════════════════════════════════════════
-     GTA 6 ENGINE
+     GTA 6 ENGINE (не тронут!)
 ══════════════════════════════════════════════════════ -->
 <script>
 'use strict';
@@ -1738,7 +1741,6 @@ window.gta6Close=function(){
  if(typeof GTA6!=='undefined'&&window._gta6started){GTA6.stop();window._gta6started=false;}
 };
 </script>
-
 <!-- openApp patch for paint+explorer -->
 <script>
 (function(){
