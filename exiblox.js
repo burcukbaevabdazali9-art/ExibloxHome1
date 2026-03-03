@@ -231,124 +231,34 @@ function exbLogout() {
 // ═══════════════════════════════════════
 // MAIN LAYOUT
 // ═══════════════════════════════════════
-function exbInjectCSS() {
-  if(document.getElementById('exb-global-css')) return;
-  const s = document.createElement('style');
-  s.id = 'exb-global-css';
-  s.textContent = `
-    #exiblox-root,#exiblox-root *{box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
-    #exb-wrap{display:flex;flex-direction:column;height:100%;overflow:hidden;background:#111318;color:#fff;}
-    #exb-topbar{height:52px;background:#0c0d13;display:flex;align-items:center;padding:0 16px;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;}
-    #exb-logo{font-size:17px;font-weight:900;background:linear-gradient(135deg,#00b2ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;letter-spacing:-.3px;}
-    #exb-searchbox{flex:1;max-width:340px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:6px 13px;display:flex;align-items:center;gap:7px;}
-    #exb-searchbox input{background:none;border:none;outline:none;color:#fff;font-size:12px;width:100%;font-family:inherit;}
-    #exb-searchbox input::placeholder{color:rgba(255,255,255,.3);}
-    #exb-body{display:flex;flex:1;overflow:hidden;}
-    /* ── SIDEBAR ── */
-    #exb-sidebar{width:88px;background:#09090f;border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;padding:6px 0;flex-shrink:0;overflow:hidden;}
-    .exb-nb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;cursor:pointer;border-radius:10px;margin:1px 5px;transition:background .15s,color .15s;color:rgba(255,255,255,.45);text-decoration:none;}
-    .exb-nb:hover{background:rgba(255,255,255,.07);color:#fff;}
-    .exb-nb.xact{background:rgba(0,178,255,.15);color:#00b2ff;}
-    .exb-nb-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(255,255,255,.06);margin-bottom:1px;transition:background .15s;}
-    .exb-nb:hover .exb-nb-ico{background:rgba(255,255,255,.12);}
-    .exb-nb.xact .exb-nb-ico{background:rgba(0,178,255,.25);}
-    .exb-nb-lbl{font-size:9.5px;font-weight:500;letter-spacing:.1px;}
-    /* ── CONTENT ── */
-    #exb-content{flex:1;overflow-y:auto;overflow-x:hidden;}
-    #exb-content::-webkit-scrollbar{width:4px;}
-    #exb-content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
-    .exb-sec{padding:20px 24px 28px;}
-    .exb-sec-h{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:#fff;}
-    /* ── CARDS ── */
-    .exb-cards{display:flex;gap:13px;flex-wrap:wrap;}
-    .exb-card{width:200px;background:#1a1d26;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s;border:1px solid rgba(255,255,255,.08);flex-shrink:0;}
-    .exb-card:hover{transform:translateY(-4px);border-color:rgba(0,178,255,.5);box-shadow:0 8px 28px rgba(0,178,255,.18);}
-    .exb-card-thumb{width:200px;height:140px;display:block;overflow:hidden;flex-shrink:0;position:relative;}
-    .exb-card-thumb-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
-    .exb-card-thumb-inner img{width:100%;height:100%;object-fit:cover;display:block;}
-    .exb-card-body{padding:9px 12px 11px;background:#1a1d26;}
-    .exb-card-name{font-size:12px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;}
-    .exb-card-meta{font-size:10px;color:rgba(255,255,255,.38);display:flex;justify-content:space-between;align-items:center;}
-    /* ── BUTTONS ── */
-    .exb-btn{padding:8px 16px;border-radius:8px;border:none;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;transition:.18s;line-height:1;}
-    .exb-btn:hover{opacity:.88;transform:translateY(-1px);}
-    .btn-blue{background:#00b2ff;color:#fff;}
-    .btn-red{background:#e74c3c;color:#fff;}
-    .btn-gray{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);}
-    .btn-gray:hover{background:rgba(255,255,255,.18)!important;transform:none!important;}
-    .btn-green{background:#2ecc71;color:#fff;}
-    .btn-purple{background:#7c3aed;color:#fff;}
-    /* ── INPUTS ── */
-    .exb-inp{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:11px 14px;color:#fff;font-size:13px;font-family:inherit;outline:none;margin-bottom:10px;transition:border .2s;}
-    .exb-inp:focus{border-color:#00b2ff;}
-    .exb-inp::placeholder{color:rgba(255,255,255,.28);}
-    .exb-inp2{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:9px 12px;color:#fff;font-size:12px;font-family:inherit;outline:none;transition:border .2s;}
-    .exb-inp2:focus{border-color:#00b2ff;}
-    .exb-inp2::placeholder{color:rgba(255,255,255,.3);}
-    /* ── MISC ── */
-    .exb-pcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-    .exb-tool-btn{padding:7px 5px;border-radius:8px;cursor:pointer;font-size:10.5px;text-align:center;transition:.15s;color:rgba(255,255,255,.55);border:1px solid transparent;}
-    .exb-tool-btn:hover{background:rgba(255,255,255,.08);color:#fff;}
-    .exb-tool-active{background:rgba(0,178,255,.18)!important;border-color:rgba(0,178,255,.4)!important;color:#00b2ff!important;}
-    .exb-btn-main{width:100%;padding:12px;border-radius:10px;border:none;font-size:13px;cursor:pointer;font-family:inherit;font-weight:700;background:linear-gradient(135deg,#00b2ff,#7c3aed);color:#fff;margin-top:6px;transition:.2s;}
-    .exb-btn-main:hover{opacity:.87;transform:translateY(-1px);}
-    .exb-auth-active{background:rgba(0,178,255,.22)!important;color:#fff!important;}
-    .edot{width:7px;height:7px;background:rgba(255,255,255,.5);border-radius:50%;display:inline-block;animation:edotB 1.2s ease-in-out infinite;}
-    .edot:nth-child(2){animation-delay:.15s}.edot:nth-child(3){animation-delay:.3s}
-    @keyframes edotB{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
-    /* compat aliases */
-    .exb-btn2{padding:8px 16px;border-radius:8px;border:none;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;transition:.18s;}
-    .exb-btn2:hover{opacity:.88;}
-    .exb2-blue{background:#00b2ff;color:#fff;}
-    .exb2-red{background:#e74c3c;color:#fff;}
-    .exb2-gray{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);}
-    .exb2-green{background:#2ecc71;color:#fff;}
-    .exb2-purple{background:#7c3aed;color:#fff;}
-    .exb-section{padding:20px 24px 28px;}
-    .exb-sec-title{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:#fff;}
-    .exb-cards-row{display:flex;gap:13px;flex-wrap:wrap;}
-    .exb-profile-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-  `;
-  document.head.appendChild(s);
-}
-
 function exbRenderMain(root) {
-  exbInjectCSS();
   const me = EXB.users[EXB.user]||{};
-
-  const NAV = [
-    ['home',   '🏠', 'Главная'],
-    ['store',  '🛒', 'Магазин'],
-    ['studio', '🛠', 'Studio'],
-    ['friends','👥', 'Друзья'],
-    ['publish','📤', 'Publish'],
-    ['ai',     '🤖', 'AI'],
-    ['avatar', '🎭', 'Аватар'],
-    ['profile','👤', 'Профиль'],
-  ];
-
   root.innerHTML = `
-  <div id="exb-wrap">
-    <div id="exb-topbar">
-      <div id="exb-logo">✦ Exiblox v4</div>
-      <div id="exb-searchbox">
-        <span style="font-size:12px;opacity:.35;">🔍</span>
-        <input id="exb-search" placeholder="Поиск игр..." onkeydown="if(event.key==='Enter')exbDoSearch(this.value)">
+  <div style="display:flex;flex-direction:column;height:100%;overflow:hidden;background:#0d0f18;font-family:'Segoe UI',system-ui,sans-serif;color:#fff;">
+    <!-- TOPBAR -->
+    <div style="height:52px;background:#080a10;display:flex;align-items:center;padding:0 18px;gap:12px;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0;">
+      <div style="font-size:17px;font-weight:900;background:linear-gradient(135deg,#00d4ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;">✦ Exiblox v4</div>
+      <div style="flex:1;max-width:340px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:6px 14px;display:flex;align-items:center;gap:7px;">
+        <span style="font-size:11px;opacity:.35">🔍</span>
+        <input id="exb-search" style="background:none;border:none;outline:none;color:#fff;font-size:12px;width:100%;font-family:inherit;" placeholder="Поиск игр..." onkeydown="if(event.key==='Enter')exbDoSearch(this.value)">
       </div>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
-        <span style="font-size:13px;font-weight:700;color:#FFD700;" id="exb-coins-disp">🪙 ${me.ecoins||0} E$</span>
-        <span style="font-size:12px;color:rgba(255,255,255,.55);">${me.isGuest?'Гость':EXB.user}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:13px;font-weight:700;color:#FFD700;">🪙 ${me.ecoins||0} E$</span>
+        <span style="font-size:12px;color:rgba(255,255,255,.5);">${me.isGuest?'👤 Гость':'👤 '+EXB.user}</span>
+        <button class="exb-btn2 exb2-gray" onclick="exbLogout()" style="padding:5px 11px;font-size:11px;">Выйти</button>
       </div>
     </div>
-    <div id="exb-body">
-      <div id="exb-sidebar">
-        ${NAV.map(([t,ico,lbl])=>`
-          <div class="exb-nb${EXB.tab===t?' xact':''}" onclick="exbTab('${t}')">
-            <div class="exb-nb-ico">${ico}</div>
-            <span class="exb-nb-lbl">${lbl}</span>
-          </div>`).join('')}
+    <!-- BODY -->
+    <div style="display:flex;flex:1;overflow:hidden;">
+      <!-- SIDEBAR -->
+      <div style="width:96px;background:#070910;border-right:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;padding-top:6px;flex-shrink:0;overflow-y:auto;">
+        ${[['home','🏠','Главная'],['store','🛒','Магазин'],['studio','🛠','Studio'],['friends','👥','Друзья'],['publish','📤','Publish'],['ai','🤖','AI'],['avatar','🎭','Аватар'],['profile','👤','Профиль']]
+          .map(([t,i,l])=>`<div class="exb-nav-btn ${EXB.tab===t?'exb-nav-active':''}" onclick="exbTab('${t}')"><span class="exb-nav-ico">${i}</span><span>${l}</span></div>`).join('')}
       </div>
-      <div id="exb-content"></div>
+      <!-- CONTENT -->
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;" id="exb-content">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,.2);">Загрузка...</div>
+      </div>
     </div>
   </div>`;
   exbTabContent(EXB.tab);
@@ -356,9 +266,9 @@ function exbRenderMain(root) {
 
 function exbTab(tab) {
   EXB.tab=tab;
-  document.querySelectorAll('.exb-nb').forEach(b=>{
-    const m=b.getAttribute('onclick')?.match(/'(\w+)'/);
-    if(m) b.classList.toggle('xact', m[1]===tab);
+  document.querySelectorAll('.exb-nav-btn').forEach(b=>{
+    const m=b.getAttribute('onclick').match(/'(\w+)'/);
+    if(m)b.classList.toggle('exb-nav-active',m[1]===tab);
   });
   exbTabContent(tab);
 }
@@ -411,18 +321,12 @@ function exbGameCards(games) {
   return games.map(g=>`
     <div class="exb-card" onclick="exbPlayGame('${g.id}')">
       <div class="exb-card-thumb" style="background:${g.color||'#1a2040'};">
-        <div class="exb-card-thumb-inner">
-          ${g.iconImage
-            ? `<img src="${eHtml(g.iconImage)}" alt="">`
-            : `<span style="font-size:54px;line-height:1;">${g.icon||'🎮'}</span>`}
-        </div>
+        ${g.iconImage?`<img src="${eHtml(g.iconImage)}" alt="">`:
+          `<span style="font-size:50px;">${g.icon||'🎮'}</span>`}
       </div>
       <div class="exb-card-body">
         <div class="exb-card-name">${eHtml(g.name)}</div>
-        <div class="exb-card-meta">
-          <span>by ${eHtml(g.author)}</span>
-          <span>👍 ${g.rating||'100%'}</span>
-        </div>
+        <div class="exb-card-meta"><span>by ${eHtml(g.author)}</span><span>👍 ${g.rating||'100%'}</span></div>
       </div>
     </div>`).join('');
 }
@@ -825,74 +729,32 @@ function exbSelectSkin(id){EXB.skin=id;localStorage.setItem(EXB_STORAGE_KEY+'ski
 function exbProfile(c){
   const me=EXB.users[EXB.user]||{};
   const sk=EXB_SKINS.find(s=>s.id===(EXB.skin||'red'))||EXB_SKINS[0];
-  c.innerHTML=`<div class="exb-section" style="max-width:520px;">
+  c.innerHTML=`<div class="exb-section" style="max-width:500px;">
     <div class="exb-sec-title">👤 Профиль</div>
-
-    <!-- PROFILE CARD -->
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 24px;margin-bottom:16px;">
-      <div style="display:flex;align-items:center;gap:18px;margin-bottom:18px;">
-        <canvas id="profile-av" width="60" height="78" style="flex-shrink:0;"></canvas>
-        <div style="flex:1;">
-          <div style="font-size:20px;font-weight:800;margin-bottom:2px;">${me.isGuest?'Гость':EXB.user}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:6px;">✦ Exiblox v4 · ${sk.name}</div>
-          ${!me.isGuest?`<div style="font-size:11px;color:#00b2ff;">🎫 ${me.code||'—'}</div>`:''}
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:22px;font-weight:800;color:#FFD700;">${me.ecoins||0}</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.35);">E$</div>
+    <div class="exb-profile-card" style="flex-direction:column;align-items:flex-start;gap:10px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <canvas id="profile-av" width="50" height="68"></canvas>
+        <div>
+          <div style="font-size:18px;font-weight:700;">${me.isGuest?'👤 Гость':'👤 '+EXB.user}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.35);">Exiblox v4</div>
         </div>
       </div>
-
-      <!-- STATS ROW -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;">
-        <div style="background:rgba(0,178,255,.1);border:1px solid rgba(0,178,255,.2);border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:18px;font-weight:800;color:#00b2ff;">${(me.friends||[]).length}</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;">Друзей</div>
-        </div>
-        <div style="background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:18px;font-weight:800;color:#9b59b6;">${(me.projects||[]).length}</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;">Проектов</div>
-        </div>
-        <div style="background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:18px;font-weight:800;color:#2ecc71;">${(me.pubGames||[]).length}</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;">Игр</div>
-        </div>
+      ${!me.isGuest?`<div style="font-size:12px;color:rgba(255,255,255,.35);">📧 ${me.email||'—'}</div>`:''}
+      ${!me.isGuest?`<div style="font-size:12px;color:#00d4ff;">🎫 Код: ${me.code||'—'}</div>`:''}
+      <div style="font-size:13px;font-weight:700;color:#FFD700;">🪙 ${me.ecoins||0} E$</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:rgba(255,255,255,.4);">👥 Друзей: ${(me.friends||[]).length}</span>
+        <span style="font-size:12px;color:rgba(255,255,255,.4);">🛠 Проектов: ${(me.projects||[]).length}</span>
+        <span style="font-size:12px;color:rgba(255,255,255,.4);">📤 Игр: ${(me.pubGames||[]).length}</span>
       </div>
-
-      <!-- DESCRIPTION -->
-      <div style="margin-bottom:14px;">
-        <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">📝 О себе</div>
-        <textarea id="exb-prof-desc" class="exb-inp2" rows="3" style="width:100%;resize:vertical;min-height:60px;line-height:1.5;"
-          placeholder="Расскажи о себе...">${eHtml(me.bio||'')}</textarea>
-        <button class="exb-btn2 exb2-blue" style="margin-top:8px;font-size:11px;padding:6px 14px;" onclick="exbSaveBio()">💾 Сохранить описание</button>
-      </div>
-
-      ${!me.isGuest?`
-      <!-- INFO -->
-      <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:14px;display:flex;flex-direction:column;gap:6px;">
-        <div style="font-size:12px;color:rgba(255,255,255,.4);">📧 ${me.email||'—'}</div>
-        ${me.joinDate?`<div style="font-size:11px;color:rgba(255,255,255,.25);">📅 Регистрация: ${me.joinDate}</div>`:''}
-      </div>`:''}
+      ${me.joinDate?`<div style="font-size:11px;color:rgba(255,255,255,.25);">📅 Регистрация: ${me.joinDate}</div>`:''}
     </div>
-
-    <!-- ACTION BUTTONS -->
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="exb-btn2 exb2-blue" onclick="exbTab('avatar')" style="font-size:12px;">🎭 Сменить скин</button>
-      <button class="exb-btn2 exb2-gray" onclick="exbTab('friends')" style="font-size:12px;">👥 Друзья</button>
-      <button class="exb-btn2 exb2-gray" onclick="exbTab('studio')" style="font-size:12px;">🛠 Studio</button>
-      <button class="exb-btn2 exb2-red" onclick="exbLogout()" style="margin-left:auto;font-size:12px;font-weight:700;">🚪 Выйти из аккаунта</button>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="exb-btn2 exb2-blue" onclick="exbTab('avatar')">🎭 Скин</button>
+      <button class="exb-btn2 exb2-red" onclick="exbLogout()">🚪 Выйти</button>
     </div>
   </div>`;
-  const pc=document.getElementById('profile-av')?.getContext('2d');
-  if(pc)exbDrawStickman(pc,30,72,sk,1.1,false,1,0);
-}
-
-function exbSaveBio(){
-  const me=EXB.users[EXB.user];if(!me)return;
-  const ta=document.getElementById('exb-prof-desc');if(!ta)return;
-  me.bio=ta.value.slice(0,200);
-  exbSaveUsers();
-  exbNotif('Профиль','Описание сохранено!','💾');
+  const pc=document.getElementById('profile-av')?.getContext('2d');if(pc)exbDrawStickman(pc,25,60,sk,1,false,1,0);
 }
 
 // ═══════════════════════════════════════
