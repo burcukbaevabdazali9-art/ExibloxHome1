@@ -15,8 +15,6 @@ const EXB = {
   TILE: 40, CANVAS_W: 6400, CANVAS_H: 2400,
   _publishing: false, _studioEditing: false, _aiTyping: false,
   VERSION: 'v4',
-  studioMode: '2d', studioBg: 'sky',
-  servers: [],
 };
 
 const EXB_SKINS = [
@@ -319,15 +317,14 @@ function exbRenderMain(root) {
   const me = EXB.users[EXB.user]||{};
 
   const NAV = [
-    ['home',    '🏠', 'Главная'],
-    ['store',   '🛒', 'Магазин'],
-    ['studio',  '🛠', 'Studio'],
-    ['servers', '🌐', 'Серверы'],
-    ['friends', '👥', 'Друзья'],
-    ['publish', '📤', 'Publish'],
-    ['ai',      '🤖', 'AI'],
-    ['avatar',  '🎭', 'Аватар'],
-    ['profile', '👤', 'Профиль'],
+    ['home',   '🏠', 'Главная'],
+    ['store',  '🛒', 'Магазин'],
+    ['studio', '🛠', 'Studio'],
+    ['friends','👥', 'Друзья'],
+    ['publish','📤', 'Publish'],
+    ['ai',     '🤖', 'AI'],
+    ['avatar', '🎭', 'Аватар'],
+    ['profile','👤', 'Профиль'],
   ];
 
   root.innerHTML = `
@@ -341,7 +338,6 @@ function exbRenderMain(root) {
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
         <span style="font-size:13px;font-weight:700;color:#FFD700;" id="exb-coins-disp">🪙 ${me.ecoins||0} E$</span>
         <span style="font-size:12px;color:rgba(255,255,255,.55);">${me.isGuest?'Гость':EXB.user}</span>
-        ${me.isGuest?'<span style="font-size:10px;background:rgba(255,255,255,.08);padding:3px 8px;border-radius:6px;color:rgba(255,255,255,.4);">Гость</span>':''}
       </div>
     </div>
     <div id="exb-body">
@@ -368,7 +364,7 @@ function exbTab(tab) {
 }
 function exbTabContent(tab) {
   const c=document.getElementById('exb-content'); if(!c)return;
-  ({home:exbHome,store:exbStore,studio:exbStudio,servers:exbServers,friends:exbFriends,publish:exbPublish,ai:exbAI,avatar:exbAvatar,profile:exbProfile})[tab]?.(c);
+  ({home:exbHome,store:exbStore,studio:exbStudio,friends:exbFriends,publish:exbPublish,ai:exbAI,avatar:exbAvatar,profile:exbProfile})[tab]?.(c);
 }
 
 // ═══════════════════════════════════════
@@ -450,9 +446,6 @@ function exbStudio(c) {
       <button class="exb-btn2 exb2-green" onclick="exbStudioTest()" style="font-size:11px;">▶ Тест</button>
       ${isGuest?'':`<button class="exb-btn2 exb2-purple" onclick="exbPublishDialog()" style="font-size:11px;">📤 Publish</button>`}
       <button class="exb-btn2 exb2-red" onclick="exbStudioClear()" style="font-size:11px;">🗑 Очистить</button>
-      <div style="height:20px;width:1px;background:rgba(255,255,255,.1);margin:0 2px;"></div>
-      <button id="exb-3d-btn" class="exb-btn2" onclick="exbToggle3D()" style="font-size:11px;background:rgba(255,255,255,.1);color:#fff;">🔳 2D</button>
-      <select id="exb-bg-sel" onchange="exbSetBg(this.value)" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#fff;font-size:11px;padding:4px 7px;outline:none;cursor:pointer;"><option value="sky">🌤 Небо</option><option value="sunset">🌅 Закат</option><option value="night">🌙 Ночь</option><option value="space">🌌 Космос</option><option value="forest">🌲 Лес</option><option value="gray">⬜ Без фона</option></select>
       <input id="exb-proj-name" class="exb-inp2" value="${eHtml(EXB.studioProjectName)}" style="width:150px;" oninput="EXB.studioProjectName=this.value">
       <span style="margin-left:auto;font-size:11px;color:rgba(255,255,255,.3);">Объектов: <span id="exb-obj-count">${EXB.studioObjects.length}</span></span>
     </div>
@@ -620,29 +613,10 @@ function exbStudioRedraw() {
   const sx=EXB.studioScrollX, sy=EXB.studioScrollY;
   if(W===0||H===0)return;
 
-  // Dynamic background based on EXB.studioBg
-  {
-    const bgs={sky:['#5b9bd5','#87ceeb','#b5d8f7'],sunset:['#1a0a2e','#7a2a6a','#f4a261'],night:['#05080f','#0a1020','#111830'],space:['#000005','#050010','#0a0020'],forest:['#0a1a05','#163010','#2d5a20'],city:['#0a0a1a','#111128','#1a1a35'],gray:['#1a1d26','#1a1d26','#1a1d26']};
-    const bgC=bgs[EXB.studioBg]||bgs.sky;
-    const grad=cv.createLinearGradient(0,0,0,H);
-    grad.addColorStop(0,bgC[0]);grad.addColorStop(0.5,bgC[1]);grad.addColorStop(1,bgC[2]);
-    cv.fillStyle=grad;cv.fillRect(0,0,W,H);
-    if(EXB.studioBg==='sky'||EXB.studioBg==='sunset'){
-      cv.save();cv.globalAlpha=0.18;
-      [[100,60,120,35],[350,40,90,28],[600,80,150,40],[900,50,110,32],[1200,70,130,38]].forEach(([cx,cy,cw,ch])=>{
-        const gx=((cx-sx)%(W+300)+W+300)%(W+300)-150;
-        cv.fillStyle=EXB.studioBg==='sunset'?'#ffb347':'#fff';
-        cv.beginPath();cv.ellipse(gx,cy,cw/2,ch/2,0,0,Math.PI*2);cv.fill();
-        cv.beginPath();cv.ellipse(gx-30,cy+5,cw/3,ch/3,0,0,Math.PI*2);cv.fill();
-        cv.beginPath();cv.ellipse(gx+35,cy+3,cw/3,ch/3,0,0,Math.PI*2);cv.fill();
-      });cv.restore();
-    }
-    if(EXB.studioBg==='night'||EXB.studioBg==='space'){
-      cv.save();cv.fillStyle='#fff';
-      for(let i=0;i<60;i++){const sx2=((i*137+sx*0.02)%W+W)%W,sy2=((i*79+sy*0.02)%H+H)%H;cv.globalAlpha=0.3+Math.sin(i*0.7)*0.3;cv.fillRect(sx2,sy2,i%3===0?2:1,i%3===0?2:1);}
-      cv.restore();
-    }
-  }
+  // Background gradient
+  const grad=cv.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'#12162a'); grad.addColorStop(1,'#0a0d1a');
+  cv.fillStyle=grad; cv.fillRect(0,0,W,H);
 
   // Grid
   cv.strokeStyle='rgba(255,255,255,.035)'; cv.lineWidth=1;
