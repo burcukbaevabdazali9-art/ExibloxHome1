@@ -1,7 +1,7 @@
 'use strict';
 // ╔══════════════════════════════════════════════╗
 // ║         EXIBLOX v4  —  Full Platform         ║
-// ║  localStorage cloud · Studio fixes · RedBall ║
+// ║  localStorage cloud · Studiоo fixes · RedBall ║
 // ╚══════════════════════════════════════════════╝
 
 const EXB = {
