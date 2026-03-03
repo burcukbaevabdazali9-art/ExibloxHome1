@@ -486,9 +486,9 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="desk-icon" data-icon-id="icon-settings" style="top:400px;left:18px" ondblclick="openApp('settings')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">⚙️</div><span>Параметры</span></div>
 <div class="desk-icon" data-icon-id="icon-paint" style="top:16px;left:118px" ondblclick="openApp('paint')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🎨</div><span>Paint</span></div>
 <div class="desk-icon" data-icon-id="icon-taskman" style="top:112px;left:118px" ondblclick="openApp('taskman')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">📊</div><span>Диспетчер задач</span></div>
-<div class="desk-icon" data-icon-id="icon-exianai" style="top:208px;left:118px" ondblclick="openApp('exianai')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🤖</div><span>Exian.AI 4.0</span></div>
+<div class="desk-icon" data-icon-id="icon-exianai" style="top:208px;left:118px" ondblclick="openApp('exianai')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🤖</div><span>Exian.AI 3.0</span></div>
 <div class="desk-icon" data-icon-id="icon-exiblox" style="top:304px;left:118px" ondblclick="openExibloxApp()" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🐍</div><span>Exiblox v3</span></div>
-<div class="desk-icon" data-icon-id="icon-gta6" style="top:400px;left:118px" ondblclick="openApp('gte6')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🎮</div><span>GTE 6</span></div>
+<div class="desk-icon" data-icon-id="icon-gta6" style="top:400px;left:118px" ondblclick="openApp('gta6')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🎮</div><span>GTA 6</span></div>
 <div class="desk-icon" data-icon-id="icon-updates" style="top:16px;left:218px" ondblclick="openApp('updates')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🔔</div><span>Обновления</span></div>
 <div class="desk-icon" data-icon-id="icon-telegram" style="top:112px;left:218px" ondblclick="openTelegram()" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">📱</div><span>Exiblox Telegram</span></div>
 <div class="desk-icon" data-icon-id="icon-parkour" style="top:208px;left:218px" ondblclick="openApp('parkour')" onclick="selectIcon(this)" onmousedown="iconDragStart(event,this)"><div class="dico">🏃</div><span>Обби Паркур</span></div>
@@ -512,7 +512,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="tb-btn" id="tb-settings" onclick="tbClick('settings')">⚙️</div>
 <div class="tb-btn" id="tb-taskman" onclick="tbClick('taskman')">📊</div>
 <div class="tb-btn" id="tb-exianai" onclick="tbClick('exianai')">🤖</div>
-<div class="tb-btn" id="tb-gte6" onclick="tbClick('gta6')">🎮</div>
+<div class="tb-btn" id="tb-gta6" onclick="tbClick('gta6')">🎮</div>
 <div class="tb-btn" id="tb-updates" onclick="tbClick('updates')">🔔</div>
 <div class="tb-btn" id="tb-parkour" onclick="tbClick('parkour')">🏃</div>
 <div class="tb-btn" id="tb-exiblox" onclick="openExibloxApp()">🐍</div>
@@ -545,7 +545,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="pin-app" onclick="openApp('updates');hideAll()"><div class="ico">🔔</div><div class="lbl">Обновления</div></div>
 <div class="pin-app" onclick="openTelegram();hideAll()"><div class="ico">📱</div><div class="lbl">Telegram</div></div>
 <div class="pin-app" onclick="openApp('parkour');hideAll()"><div class="ico">🏃</div><div class="lbl">Обби Паркур</div></div>
-<div class="pin-app" onclick="openApp('gte6');hideAll()"><div class="ico">🎮</div><div class="lbl">GTE 6</div></div>
+<div class="pin-app" onclick="openApp('gta6');hideAll()"><div class="ico">🎮</div><div class="lbl">GTA 6</div></div>
 <div class="pin-app" onclick="openExibloxOGStore();hideAll()"><div class="ico">🛍️</div><div class="lbl">OGStore</div></div>
 </div>
 </div>
@@ -616,15 +616,6 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div id="ctx-menu">
 <div class="ctx-item" onclick="ctxRefresh()"><span>🔃</span>Обновить</div>
 <div class="ctx-sep"></div>
-<div class="ctx-item" style="position:relative" onmouseenter="document.getElementById('ctx-sz').style.display='block'" onmouseleave="document.getElementById('ctx-sz').style.display='none'">
-  <span>🔲</span>Размер значков<span style="margin-left:auto;opacity:.5;">&#9658;</span>
-  <div id="ctx-sz" style="display:none;position:absolute;left:100%;top:-2px;background:#1e2130;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:5px;min-width:150px;box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:9999;">
-    <div class="ctx-item" onclick="setIconSize('small')"><span>&#128313;</span>Мелкие</div>
-    <div class="ctx-item" onclick="setIconSize('medium')"><span>&#128310;</span>Обычные</div>
-    <div class="ctx-item" onclick="setIconSize('large')"><span>&#128309;</span>Крупные</div>
-  </div>
-</div>
-<div class="ctx-sep"></div>
 <div class="ctx-item" onclick="openWallpaperGallery('light');hideAll()"><span>☀️</span>Светлые обои</div>
 <div class="ctx-item" onclick="openWallpaperGallery('dark');hideAll()"><span>🌑</span>Тёмные обои</div>
 <div class="ctx-sep"></div>
@@ -640,7 +631,22 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <span class="tb-icon">📁</span><span class="tb-title">Проводник</span>
 <div class="win-btns"><div class="wb" onclick="minimizeWin('explorer')">─</div><div class="wb" onclick="toggleMax('win-explorer')">⬜</div><div class="wb cls" onclick="closeWin('explorer')">✕</div></div>
 </div>
-<div class="win-body" style="padding:0;overflow:hidden;"><div id="exibloxogstore-root" style="width:100%;height:100%;overflow:auto;background:#0d0f18;"></div></div>
+<div class="win-body"><div class="exp-wrap">
+<div class="exp-topbar">
+<div class="exp-nav">◀</div><div class="exp-nav">▶</div><div class="exp-nav" onclick="expNav('Рабочий стол')">↑</div>
+<input class="exp-path" id="exp-path" value="ExiWin://Рабочий стол">
+</div>
+<div class="exp-body">
+<div class="exp-side">
+<div class="exp-side-item active" data-folder="Рабочий стол" onclick="expNav('Рабочий стол')">🖥️ Рабочий стол</div>
+<div class="exp-side-item" data-folder="Документы" onclick="expNav('Документы')">📄 Документы</div>
+<div class="exp-side-item" data-folder="Загрузки" onclick="expNav('Загрузки')">⬇️ Загрузки</div>
+<div class="exp-side-item" data-folder="Изображения" onclick="expNav('Изображения')">🖼️ Изображения</div>
+</div>
+<div class="exp-files" id="exp-files-content"></div>
+</div>
+<div class="exp-statusbar"><span id="exp-status">Объектов: 0</span></div>
+</div></div>
 <div class="resize-handle" onmousedown="resizeWin(event,'win-explorer')"></div>
 </div>
 
@@ -692,7 +698,7 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="set-page active" id="set-about"><div class="set-h1">О системе</div>
 <div class="set-card"><div class="set-card-l"><div class="n">ExiWin 12</div><div class="d">Версия 26H1 — Build 26200</div></div></div>
 <div class="set-card"><div class="set-card-l"><div class="n">Платформа</div><div class="d">Exiblox Official</div></div></div>
-<div class="set-card"><div class="set-card-l"><div class="n">AI</div><div class="d">Exian.AI 4.0</div></div></div>
+<div class="set-card"><div class="set-card-l"><div class="n">AI</div><div class="d">Exian.AI 3.0</div></div></div>
 </div>
 <div class="set-page" id="set-theme"><div class="set-h1">Тема и обои</div>
 <div class="set-card" style="cursor:pointer" onclick="openWallpaperGallery('dark')"><div class="set-card-l"><div class="n">🌑 Тёмные обои</div></div><span style="color:var(--text2)">▶</span></div>
@@ -779,14 +785,14 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <!-- EXIAN.AI -->
 <div class="window" id="win-exianai" style="width:900px;height:620px;" onclick="bringFront('win-exianai')">
 <div class="titlebar" onmousedown="dragWin(event,'win-exianai')">
-<span class="tb-icon">🤖</span><span class="tb-title">Exian.AI 4.0</span>
+<span class="tb-icon">🤖</span><span class="tb-title">Exian.AI 3.0</span>
 <div class="win-btns"><div class="wb" onclick="minimizeWin('exianai')">─</div><div class="wb" onclick="toggleMax('win-exianai')">⬜</div><div class="wb cls" onclick="closeWin('exianai')">✕</div></div>
 </div>
 <div class="win-body" style="overflow:hidden">
 <div class="echat-wrap"><div class="echat-main">
 <div class="echat-header">
 <div class="echat-header-ico">🤖</div>
-<div class="echat-header-info"><div class="echat-header-name">Exian.AI 4.0</div><div class="echat-header-status" id="exian-status">🟢 Онлайн · Powered by Claude</div></div>
+<div class="echat-header-info"><div class="echat-header-name">Exian.AI 3.0</div><div class="echat-header-status">Онлайн · ExiWin 12</div></div>
 </div>
 <div class="echat-quick">
 <div class="echat-quick-btn" onclick="exianQuick('Что ты умеешь?')">🤔 Что умеешь?</div>
@@ -826,14 +832,14 @@ body.light-theme .echat-wrap{background:rgba(246,248,255,.98);}
 <div class="resize-handle" onmousedown="resizeWin(event,'win-parkour')"></div>
 </div>
 
-<!-- GTE 6 -->
-<div class="window" id="win-gte6" style="width:1020px;height:680px;" onclick="bringFront('win-gte6')">
-<div class="titlebar" onmousedown="dragWin(event,'win-gte6')">
-<span class="tb-icon">🎮</span><span class="tb-title">GTE 6 — ExiWin City</span>
-<div class="win-btns"><div class="wb" onclick="minimizeWin('gta6')">─</div><div class="wb" onclick="toggleMax('win-gte6')">⬜</div><div class="wb cls" onclick="gta6Close()">✕</div></div>
+<!-- GTA 6 -->
+<div class="window" id="win-gta6" style="width:1020px;height:680px;" onclick="bringFront('win-gta6')">
+<div class="titlebar" onmousedown="dragWin(event,'win-gta6')">
+<span class="tb-icon">🎮</span><span class="tb-title">GTA 6 — ExiWin City</span>
+<div class="win-btns"><div class="wb" onclick="minimizeWin('gta6')">─</div><div class="wb" onclick="toggleMax('win-gta6')">⬜</div><div class="wb cls" onclick="gta6Close()">✕</div></div>
 </div>
 <div class="win-body" id="gta6-root" style="overflow:hidden;padding:0;"></div>
-<div class="resize-handle" onmousedown="resizeWin(event,'win-gte6')"></div>
+<div class="resize-handle" onmousedown="resizeWin(event,'win-gta6')"></div>
 </div>
 
 <!-- EXIBLOX -->
@@ -1013,7 +1019,7 @@ function centerWindow(w){
 // ── WINDOW MANAGEMENT ────────────────────────────────────
 window.bringFront=function(id){const w=el(id);if(w)w.style.zIndex=++winZ;};
 window.openApp=function(app){
- if(app==='gte6'){openGta6();return;}
+ if(app==='gta6'){openGta6();return;}
  if(app==='parkour'){openParkour();return;}
  const w=el('win-'+app);
  if(w){
@@ -1128,53 +1134,45 @@ let paintCanvas,paintCtx,paintColor='#0078d4',paintSize=4,paintTool='pen',painti
 // ── TASK MANAGER ──────────────────────────────────────────
 function renderTaskMan(){
  const c=el('tm-body-content');if(!c)return;
- const apps=['ExiWin Shell','Exian.AI','Edge','Paint','Проводник','Обби Паркур','GTE 6','Exiblox v3','ExibloxOGStore'];
+ const apps=['ExiWin Shell','Exian.AI','Edge','Paint','Проводник','Обби Паркур','GTA 6','Exiblox v3','ExibloxOGStore'];
  let h='<table class="tm-table"><thead><tr><th>Процесс</th><th>ЦП</th><th>ОЗУ</th><th>PID</th></tr></thead><tbody>';
  apps.forEach((a,i)=>{const cpu=(Math.random()*15).toFixed(1),ram=(Math.random()*200+20).toFixed(0);h+=`<tr><td>${a}</td><td>${cpu}%</td><td>${ram} МБ</td><td>${1000+i*137}</td></tr>`;});
  h+='</tbody></table>';c.innerHTML=h;
 }
 
-// ── EXIAN.AI 4.0 — Powered by Claude ─────────────────
-var EXIAN_SYS='Ты Exian.AI 4.0 — умный ассистент в ExiWin 12 (браузерная ОС). Отвечай на русском языке дружелюбно. Используй эмодзи. В ExiWin 12: Проводник, Блокнот, Edge, Paint, Калькулятор, Exian.AI 4.0, Обби Паркур, GTE 6 (гонки), Exiblox v4 (как Roblox), ExibloxOGStore, ExiPhone.';
-var exianHistory=[];
-function exianCallAPI(msg,cb){
- exianHistory.push({role:'user',content:msg});
- var msgs=exianHistory.slice(-10);
- fetch('https://api.anthropic.com/v1/messages',{method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,system:EXIAN_SYS,messages:msgs})})
- .then(function(r){return r.json();})
- .then(function(d){
-  var txt=(d.content&&d.content[0])?d.content[0].text:'Ошибка ответа';
-  exianHistory.push({role:'assistant',content:txt});
-  cb(null,txt);
- }).catch(function(){cb('⚠️ Ошибка соединения с Claude API.',null);});
+// ── EXIAN.AI ──────────────────────────────────────────────
+const aiKnowledge={
+ 'привет':['Привет! 👋 Как дела?','Здравствуйте! Рад вас видеть!'],
+ 'как дела':['Отлично! А у вас?','Прекрасно! Готов помочь!'],
+ 'что ты умеешь':['Я Exian.AI 3.0! Умею:\n• Отвечать на вопросы\n• Писать код\n• Рассказывать анекдоты\n• Помогать с проектами 🚀'],
+ 'код':['Вот Python:\n```python\ndef fibonacci(n):\n    a,b=0,1\n    res=[]\n    for _ in range(n):\n        res.append(a);a,b=b,a+b\n    return res\nprint(fibonacci(10))\n```'],
+ 'python':['```python\nclass Calc:\n    def add(self,a,b):return a+b\n    def mul(self,a,b):return a*b\nc=Calc()\nprint(c.add(5,3))  # 8\n```'],
+ 'анекдот':['Программист спрашивает: «Почему мой код не работает?» — «Потому что ты его написал!» 😂','— Сколько программистов нужно, чтобы вкрутить лампочку?\n— Ни одного, это проблема железа! 💡'],
+ 'идея':['💡 Идеи для проектов:\n1. AI-бот для Telegram\n2. Игра на Canvas\n3. Трекер привычек\n4. Чат-приложение\n5. Генератор мемов'],
+ 'exiblox':['Exiblox Official — игровая платформа нового поколения! 🐍\n• Exiblox v3 в ExiWin\n• Обби Паркур с чекпоинтами\n• GTA 6 в браузере\n• Exian.AI 3.0\n• ExibloxOGStore 🛍️'],
+};
+function aiResponse(msg){
+ const m=msg.toLowerCase();
+ for(const[k,v] of Object.entries(aiKnowledge)){if(m.includes(k))return v[Math.floor(Math.random()*v.length)];}
+ const d=[`Интересный вопрос! Попробуй спросить точнее 🤔`,`Понял: «${msg}» — уточни, и я помогу! 💡`];
+ return d[Math.floor(Math.random()*d.length)];
 }
 function addChatMsg(text,isUser){
- var c=el('exian-chat-messages');if(!c)return;
- var d=document.createElement('div');d.className='echat-msg echat-animate '+(isUser?'echat-user':'');
- var time=new Date().toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'});
- var esc=text
-  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-  .replace(/```[\w]*\n?([\s\S]*?)```/g,function(_,c){return '<pre style="background:rgba(0,0,0,.4);padding:10px;border-radius:8px;font-size:12px;overflow-x:auto;margin:4px 0;white-space:pre-wrap;"><code>'+c+'</code></pre>';})
-  .replace(/\n/g,'<br>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
- if(isUser){d.innerHTML='<div class="echat-bubble echat-bubble-user">'+esc+'</div>';}
- else{d.innerHTML='<div class="echat-avatar-bot" style="font-size:22px;flex-shrink:0;">🤖</div><div class="echat-bot-wrap"><div class="echat-bot-name">Exian.AI 4.0 &middot; '+time+'</div><div class="echat-bubble echat-bubble-bot">'+esc+'</div></div>';}
+ const c=el('exian-chat-messages');if(!c)return;
+ const d=document.createElement('div');d.className='echat-msg echat-animate '+(isUser?'echat-user':'');
+ const time=new Date().toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'});
+ const esc=text.replace(/```(\w*)\n?([\s\S]*?)```/g,'<pre><code>$2</code></pre>').replace(/\n/g,'<br>');
+ if(isUser){d.innerHTML=`<div class="echat-bubble echat-bubble-user">${esc}</div>`;}
+ else{d.innerHTML=`<div class="echat-avatar-bot">🤖</div><div class="echat-bot-wrap"><div class="echat-bot-name">Exian.AI · ${time}</div><div class="echat-bubble echat-bubble-bot">${esc}</div></div>`;}
  c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
 window.exianSend=function(){
- var inp=el('exian-chat-input');if(!inp)return;
- var msg=inp.value.trim();if(!msg)return;inp.value='';
- addChatMsg(msg,true);
- var st=el('exian-status');if(st)st.textContent='⏳ Печатает...';
- var tid=document.createElement('div');tid.id='typing-indicator';tid.className='echat-msg';
- tid.innerHTML='<div style="font-size:22px;flex-shrink:0;">🤖</div><div class="echat-typing"><span class="edot"></span><span class="edot"></span><span class="edot"></span></div>';
+ const inp=el('exian-chat-input');if(!inp)return;
+ const msg=inp.value.trim();if(!msg)return;inp.value='';addChatMsg(msg,true);
+ const tid=document.createElement('div');tid.id='typing-indicator';tid.className='echat-msg';
+ tid.innerHTML='<div class="echat-avatar-bot">🤖</div><div class="echat-typing"><span class="edot"></span><span class="edot"></span><span class="edot"></span></div>';
  el('exian-chat-messages').appendChild(tid);el('exian-chat-messages').scrollTop=99999;
- exianCallAPI(msg,function(err,resp){
-  var t=el('typing-indicator');if(t)t.remove();
-  addChatMsg(err||resp,false);
-  if(st)st.textContent='🟢 Онлайн · Powered by Claude';
- });
+ setTimeout(()=>{const t=el('typing-indicator');if(t)t.remove();addChatMsg(aiResponse(msg),false);},800+Math.random()*1200);
 };
 window.exianQuick=function(msg){el('exian-chat-input').value=msg;exianSend();};
 document.addEventListener('keydown',e=>{if(e.target===el('exian-chat-input')&&e.key==='Enter'&&!e.shiftKey){e.preventDefault();exianSend();}});
@@ -1333,24 +1331,25 @@ window.applyBrightnessAsDim=function(brightnessValue){
 // PHONE VERSION
 // ══════════════════════════════════════════
 window.loadPhoneVersion=function(){
- var tile=el('tr-phone');if(tile){tile.classList.toggle('off');tile.classList.toggle('on');}
- var pw=document.getElementById('exiphone-float');
- if(pw){pw.remove();return;}
- pw=document.createElement('div');pw.id='exiphone-float';
- pw.style.cssText='position:fixed;right:20px;bottom:60px;width:295px;height:555px;background:#0d0f18;border-radius:36px;border:3px solid rgba(255,255,255,.15);z-index:9000;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.85);';
- var apps=[['📞','Звонки'],['💬','Чат'],['📷','Камера'],['🌐','Edge'],['📝','Заметки'],['🎵','Музыка'],['🗺','Карты'],['⚙️','Настройки'],['🎮','Игры'],['✦','Exiblox'],['🤖','AI'],['🛍️','OGStore']];
- pw.innerHTML='<div style="background:rgba(255,255,255,.04);padding:14px 18px 10px;flex-shrink:0;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);">'
-  +'<div style="width:60px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 10px;"></div>'
-  +'<div style="color:#fff;font-size:18px;font-weight:700;">📱 ExiPhone 12</div>'
-  +'<div style="font-size:12px;color:rgba(255,255,255,.3);">'+new Date().toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'})+'</div>'
-  +'</div>'
-  +'<div style="flex:1;padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;overflow-y:auto;align-content:start;">'
-  +apps.map(function(a){return '<div onclick="showNotif(\'ExiPhone\',\''+a[0]+' '+a[1]+' — скоро!\',\''+a[0]+'')" style="background:rgba(255,255,255,.08);border-radius:14px;padding:10px 2px;text-align:center;cursor:pointer;transition:.15s;" onmouseover="this.style.background=\'rgba(255,255,255,.15)\'" onmouseout="this.style.background=\'rgba(255,255,255,.08)\'"><div style="font-size:22px;">'+a[0]+'</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px;">'+a[1]+'</div></div>';}).join('')
-  +'</div>'
-  +'<div style="background:rgba(255,255,255,.04);padding:10px;display:flex;justify-content:center;border-top:1px solid rgba(255,255,255,.06);">'
-  +'<div onclick="document.getElementById(\'exiphone-float\').remove()" style="cursor:pointer;padding:8px 28px;background:rgba(255,255,255,.1);border-radius:20px;color:#fff;font-size:13px;">✕ Закрыть</div></div>';
- document.body.appendChild(pw);
- showNotif('ExiPhone','Телефон запущен 📱','✅');
+ const tile=el('tr-phone');
+ if(tile)tile.classList.toggle('off');
+ // Проверяем если phone.js уже загружен
+ if(typeof initPhoneVersion!=='undefined'){
+  if(typeof initPhoneVersion==='function')initPhoneVersion();
+  showNotif('Phone Version','Телефонная версия запущена 📱','📱');
+  return;
+ }
+ const script=document.createElement('script');
+ script.src='phone.js';
+ script.onload=function(){
+  showNotif('Phone Version','phone.js загружен! 📱','✅');
+  if(typeof initPhoneVersion==='function')initPhoneVersion();
+ };
+ script.onerror=function(){
+  showNotif('Phone Version','phone.js не найден рядом с index.html','❌');
+  if(tile)tile.classList.add('off');
+ };
+ document.body.appendChild(script);
 };
 
 // ══════════════════════════════════════════
@@ -1410,222 +1409,12 @@ window.openExibloxApp=function(){
  hideAll();
 };
 
-window.smSearch=function(q){
- var all=[{n:'Проводник',i:'📁',a:'explorer'},{n:'Параметры',i:'⚙️',a:'settings'},
-  {n:'Edge',i:'🌐',a:'browser'},{n:'Блокнот',i:'📝',a:'notepad'},
-  {n:'Калькулятор',i:'🧮',a:'calc'},{n:'Paint',i:'🎨',a:'paint'},
-  {n:'Диспетчер',i:'📊',a:'taskman'},{n:'Exian.AI',i:'🤖',a:'exianai'},
-  {n:'Обновления',i:'🔔',a:'updates'},{n:'Обби Паркур',i:'🏃',a:'parkour'},
-  {n:'GTE 6',i:'🎮',a:'gte6'},{n:'Exiblox',i:'✦',a:'exiblox'},
-  {n:'OGStore',i:'🛍️',a:'ogstore'}];
- var pinned=document.querySelector('.pinned-apps');
- if(!q){if(pinned)pinned.style.display='';var old=document.getElementById('sm-sr');if(old)old.remove();return;}
- if(pinned)pinned.style.display='none';
- var sr=document.getElementById('sm-sr');
- if(!sr){sr=document.createElement('div');sr.id='sm-sr';sr.style.cssText='padding:8px 12px;';
-  var ps=document.querySelector('#sm-pinned-sec');if(ps)ps.after(sr);}
- var res=all.filter(function(a){return a.n.toLowerCase().indexOf(q.toLowerCase())>=0;});
- if(!res.length){sr.innerHTML='<div style="padding:12px;color:rgba(255,255,255,.4)">Ничего не найдено</div>';return;}
- sr.innerHTML=res.map(function(a){return '<div class="pin-app" onclick="openApp("'+a.a+'");hideAll()"><div class="ico">'+a.i+'</div><div class="lbl">'+a.n+'</div></div>';}).join('');
-};
+window.smSearch=function(){};
 
 window.addEventListener('DOMContentLoaded',()=>{
  const h=new Date().getHours(),g=el('br-hello');
  if(g)g.textContent=h<6?'Доброй ночи!':h<12?'Доброе утро!':h<18?'Добрый день!':'Добрый вечер!';
 });
-// ══════════════ ICON SIZES ══════════════════════════════
-window.setIconSize=function(sz){
- var s={small:{w:'68px',f:'30px'},medium:{w:'80px',f:'40px'},large:{w:'96px',f:'52px'}}[sz]||{w:'80px',f:'40px'};
- document.querySelectorAll('.desk-icon').forEach(function(ic){
-  ic.style.width=s.w;var d=ic.querySelector('.dico');if(d)d.style.fontSize=s.f;
- });
- try{localStorage.setItem('exiwin_icon_size',sz);}catch(e){}
- hideAll();
- showNotif('Значки',{small:'Мелкие',medium:'Обычные',large:'Крупные'}[sz],'🔲');
-};
-(function(){
- var s=localStorage.getItem('exiwin_icon_size');
- if(s)document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){setIconSize(s);},500);});
-})();
-
-// ══════════════ NOTEPAD AUTOSAVE ════════════════════════
-var npTabs=[{name:'Без названия 1',content:''}],npCurTab=0;
-(function(){
- try{var s=localStorage.getItem('exiwin_notes');if(s){var t=JSON.parse(s);if(t&&t.length)npTabs=t;}}catch(e){}
-})();
-window.npOnInput=function(){
- var a=document.getElementById('np-area');if(!a)return;
- npTabs[npCurTab].content=a.value;
- try{localStorage.setItem('exiwin_notes',JSON.stringify(npTabs));}catch(e){}
- var sl=document.getElementById('np-status-ln');
- if(sl)sl.textContent='Строк: '+a.value.split('\n').length+' · Символов: '+a.value.length;
-};
-window.npSave=function(){
- npOnInput();
- showNotif('Блокнот','Сохранено!','💾');
-};
-window.npDownload=function(){
- var a=document.getElementById('np-area');if(!a)return;
- var b=new Blob([a.value],{type:'text/plain'});
- var u=URL.createObjectURL(b),l=document.createElement('a');
- l.href=u;l.download=(npTabs[npCurTab].name||'note')+'.txt';l.click();URL.revokeObjectURL(u);
-};
-document.addEventListener('DOMContentLoaded',function(){
- var a=document.getElementById('np-area');
- if(a){
-  a.value=npTabs[0].content||'';
-  a.addEventListener('input',window.npOnInput);
- }
-});
-
-// ══════════════ EXPLORER FULL REWRITE ═══════════════════
-window.expNav=function(folder){
- var ep=document.getElementById('exp-path');if(ep)ep.value='ExiWin://'+folder;
- document.querySelectorAll('.exp-side-item').forEach(function(s){s.classList.toggle('active',s.dataset&&s.dataset.folder===folder);});
- var c=document.getElementById('exp-files-content');if(!c)return;c.innerHTML='';
-
- function makeFile(ico,name,ondbl){
-  var d=document.createElement('div');d.className='file-item';
-  d.innerHTML='<div class="ico">'+ico+'</div><div class="fname">'+name+'</div>';
-  if(ondbl)d.ondblclick=ondbl;
-  c.appendChild(d);
- }
-
- if(folder==='ЭтотКомпьютер'){
-  var notes=[];try{notes=JSON.parse(localStorage.getItem('exiwin_notes')||'[]');}catch(e){}
-  makeFile('🖥️','Рабочий стол',function(){expNav('Рабочий стол');});
-  makeFile('📄','Документы',function(){expNav('Документы');});
-  makeFile('⬇️','Загрузки',function(){expNav('Загрузки');});
-  makeFile('🖼️','Изображения',function(){expNav('Изображения');});
-  makeFile('📝','Заметки ('+notes.length+' файл)',function(){expNav('Заметки');});
-  makeFile('✦','Exiblox v4',function(){openApp('exiblox');});
-  makeFile('🎮','GTE 6',function(){openApp('gte6');});
-  makeFile('🏃','Обби Паркур',function(){openApp('parkour');});
-  makeFile('👤','Профили',function(){expNav('Профили');});
-  var es=document.getElementById('exp-status');if(es)es.textContent='Объектов: 9';
-  return;
- }
-
- if(folder==='Заметки'){
-  var notes2=[];try{notes2=JSON.parse(localStorage.getItem('exiwin_notes')||'[{"name":"Без названия 1","content":""}]');}catch(e){notes2=[{name:'Без названия 1',content:''}];}
-  notes2.forEach(function(n,i){makeFile('📝',n.name+'.txt',function(){expOpenNote(i);});});
-  var es=document.getElementById('exp-status');if(es)es.textContent='Заметок: '+notes2.length;
-  return;
- }
-
- if(folder==='Профили'){
-  expRenderProfiles(c);return;
- }
-
- // Default filesystem
- if(typeof fileSystem!=='undefined'){
-  var files=fileSystem[folder]||[];
-  files.forEach(function(f){
-   makeFile(f.i,f.n,f.f?function(){expNav(f.n);}:function(){
-    var n=f.n;
-    if(n.endsWith('.txt'))openApp('notepad');
-    else if(n.endsWith('.jpg')||n.endsWith('.png'))openApp('paint');
-    else showNotif('Проводник','Открытие: '+n,'📄');
-   });
-  });
-  var es=document.getElementById('exp-status');if(es)es.textContent='Объектов: '+files.length;
- }
-};
-
-window.expOpenNote=function(i){
- openApp('notepad');
- setTimeout(function(){
-  var notes=[];try{notes=JSON.parse(localStorage.getItem('exiwin_notes')||'[]');}catch(e){}
-  if(notes.length){npTabs=notes;npCurTab=i||0;var a=document.getElementById('np-area');if(a)a.value=npTabs[npCurTab]&&npTabs[npCurTab].content||'';}
- },150);
-};
-
-window.expSearch=function(q){
- var c=document.getElementById('exp-files-content');if(!c)return;
- if(!q){expNav('Рабочий стол');return;}
- var ep=document.getElementById('exp-path');if(ep)ep.value='ExiWin://Поиск: '+q;
- if(typeof fileSystem==='undefined'){return;}
- var all=[];
- Object.keys(fileSystem).forEach(function(fol){fileSystem[fol].forEach(function(f){all.push({i:f.i,n:f.n,folder:fol});});});
- var res=all.filter(function(f){return f.n.toLowerCase().indexOf(q.toLowerCase())>=0;});
- c.innerHTML=res.length?res.map(function(f){
-  return '<div class="file-item"><div class="ico">'+f.i+'</div><div class="fname">'+f.n+'<br><small style="opacity:.35;font-size:9px;">'+f.folder+'</small></div></div>';
- }).join(''):'<div style="padding:20px;color:rgba(255,255,255,.3);">Ничего не найдено</div>';
- var es=document.getElementById('exp-status');if(es)es.textContent='Найдено: '+res.length;
-};
-
-// ══════════════ PROFILES SYSTEM ═════════════════════════
-function expRenderProfiles(c){
- var profiles=[];try{profiles=JSON.parse(localStorage.getItem('exiwin_profiles')||'[]');}catch(e){}
- var cur=localStorage.getItem('exiwin_cur_profile')||'';
- var avList=['🧑','👦','👧','🧔','👩','🧒','🦸','🧙','👨‍💻','👩‍💻','🦊','🐱'];
- var html='<div style="padding:14px 16px;width:100%;">'
-  +'<div style="font-size:15px;font-weight:700;margin-bottom:14px;color:#fff;">👤 Профили ExiWin</div>'
-  +(profiles.length?'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">'
-   +profiles.map(function(p){
-    return '<div style="background:'+(p.name===cur?'rgba(0,178,255,.2)':'rgba(255,255,255,.07)')
-     +';border:2px solid '+(p.name===cur?'#00b2ff':'rgba(255,255,255,.1)')
-     +';border-radius:12px;padding:12px 10px;width:110px;text-align:center;cursor:pointer;position:relative;" onclick="expSwitchProfile(\''+p.name+'\')">'
-     +'<div style="font-size:34px;">'+p.avatar+'</div>'
-     +'<div style="font-size:12px;font-weight:600;margin-top:4px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+p.name+'</div>'
-     +(p.name===cur?'<div style="font-size:10px;color:#00b2ff;">● Активный</div>':'')
-     +'<div onclick="event.stopPropagation();expDeleteProfile(\''+p.name+'\')" style="position:absolute;top:4px;right:6px;opacity:.3;cursor:pointer;font-size:13px;" onmouseover="this.style.opacity=\'1\'" onmouseout="this.style.opacity=\'.3\'">✕</div>'
-     +'</div>';
-   }).join('')+'</div>':'<div style="color:rgba(255,255,255,.3);font-size:13px;margin-bottom:14px;">Профилей ещё нет. Создай первый!</div>')
-  +'<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px;">'
-  +'<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:10px;">➕ Новый профиль</div>'
-  +'<input id="pr-name" placeholder="Имя профиля" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:7px;padding:8px 12px;color:#fff;font-size:12px;outline:none;width:100%;margin-bottom:8px;box-sizing:border-box;">'
-  +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;">'
-  +avList.map(function(a){return '<div onclick="document.querySelectorAll(\'.pravo\').forEach(function(x){x.style.outline=\'none\';});this.style.outline=\'2px solid #00b2ff\';document.getElementById(\'pr-sel-av\').value=\''+a+'\';" class="pravo" style="font-size:22px;cursor:pointer;padding:4px 6px;border-radius:7px;transition:.15s;" onmouseover="this.style.background=\'rgba(255,255,255,.1)\'" onmouseout="this.style.background=\'\'">'+a+'</div>';}).join('')
-  +'<input id="pr-sel-av" type="hidden" value="🧑"></div>'
-  +'<button onclick="expCreateProfile()" style="background:#00b2ff;border:none;color:#fff;padding:9px 20px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:600;">Создать профиль</button>'
-  +'</div></div>';
- c.innerHTML=html;
-}
-
-window.expCreateProfile=function(){
- var ne=document.getElementById('pr-name');if(!ne)return;
- var name=ne.value.trim();if(!name){showNotif('Профили','Введи имя!','⚠️');return;}
- var profiles=[];try{profiles=JSON.parse(localStorage.getItem('exiwin_profiles')||'[]');}catch(e){}
- if(profiles.some(function(p){return p.name===name;})){
-  showNotif('Профили','«'+name+'» уже занят — выбери другое имя!','⚠️');return;
- }
- var av=(document.getElementById('pr-sel-av')||{}).value||'🧑';
- profiles.push({name:name,avatar:av,created:new Date().toLocaleDateString('ru')});
- localStorage.setItem('exiwin_profiles',JSON.stringify(profiles));
- expSwitchProfile(name);
- showNotif('Профили','Профиль «'+name+'» создан!','✅');
- expNav('Профили');
-};
-
-window.expSwitchProfile=function(name){
- localStorage.setItem('exiwin_cur_profile',name);
- var ue=document.getElementById('sm-username');if(ue)ue.textContent=name;
- var ae=document.getElementById('sm-avatar');
- var profiles=[];try{profiles=JSON.parse(localStorage.getItem('exiwin_profiles')||'[]');}catch(e){}
- var pr=profiles.find(function(x){return x.name===name;});
- if(ae&&pr)ae.textContent=pr.avatar;
- showNotif('Профили','Активен: '+name,'👤');
- expNav('Профили');
-};
-
-window.expDeleteProfile=function(name){
- var profiles=[];try{profiles=JSON.parse(localStorage.getItem('exiwin_profiles')||'[]');}catch(e){}
- profiles=profiles.filter(function(p){return p.name!==name;});
- localStorage.setItem('exiwin_profiles',JSON.stringify(profiles));
- if(localStorage.getItem('exiwin_cur_profile')===name)localStorage.removeItem('exiwin_cur_profile');
- expNav('Профили');
-};
-
-// Restore profile on page load
-(function(){
- var cur=localStorage.getItem('exiwin_cur_profile');if(!cur)return;
- var ue=document.getElementById('sm-username');if(ue)ue.textContent=cur;
- var profiles=[];try{profiles=JSON.parse(localStorage.getItem('exiwin_profiles')||'[]');}catch(e){}
- var pr=profiles.find(function(x){return x.name===cur;});
- var ae=document.getElementById('sm-avatar');if(ae&&pr)ae.textContent=pr.avatar;
-})();
-
 </script>
 
 <!-- ══════════════════════════════════════════════════════
@@ -1837,11 +1626,11 @@ window.parkourClose = function(){
 </script>
 
 <!-- ══════════════════════════════════════════════════════
-     GTE 6 ENGINE
+     GTA 6 ENGINE
 ══════════════════════════════════════════════════════ -->
 <script>
 'use strict';
-window.GTE6=(function(){
+window.GTA6=(function(){
 const abs=Math.abs,sqrt=Math.sqrt,sin=Math.sin,cos=Math.cos,atan2=Math.atan2,PI=Math.PI,floor=Math.floor,min=Math.min,max=Math.max;
 const clamp=(v,a,b)=>max(a,min(b,v)),lerp=(a,b,t)=>a+(b-a)*t,dst=(ax,ay,bx,by)=>sqrt((ax-bx)**2+(ay-by)**2),rnd=(a,b)=>Math.random()*(b-a)+a,pick=arr=>arr[floor(Math.random()*arr.length)];
 const lerpA=(a,b,t)=>{let d=b-a;while(d>PI)d-=PI*2;while(d<-PI)d+=PI*2;return a+d*t;};
@@ -1939,14 +1728,14 @@ return{init,stop};
 })();
 
 window.openGta6=function(){
- const w=el('win-gte6'),root=el('gta6-root');
- if(w){w.style.display='flex';requestAnimationFrame(()=>{centerWindow(w);bringFront('win-gte6');});const tb=el('tb-gte6');if(tb)tb.classList.add('running','active-win');}
- if(root&&!window._gte6started){GTE6.init(root);window._gte6started=true;}
+ const w=el('win-gta6'),root=el('gta6-root');
+ if(w){w.style.display='flex';requestAnimationFrame(()=>{centerWindow(w);bringFront('win-gta6');});const tb=el('tb-gta6');if(tb)tb.classList.add('running','active-win');}
+ if(root&&!window._gta6started){GTA6.init(root);window._gta6started=true;}
 };
 window.gta6Close=function(){
- const w=el('win-gte6');if(w)w.style.display='none';
- const tb=el('tb-gte6');if(tb)tb.classList.remove('running','active-win');
- if(typeof GTE6!=='undefined'&&window._gte6started){GTE6.stop();window._gte6started=false;}
+ const w=el('win-gta6');if(w)w.style.display='none';
+ const tb=el('tb-gta6');if(tb)tb.classList.remove('running','active-win');
+ if(typeof GTA6!=='undefined'&&window._gta6started){GTA6.stop();window._gta6started=false;}
 };
 </script>
 
