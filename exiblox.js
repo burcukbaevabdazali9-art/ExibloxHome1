@@ -1345,16 +1345,3 @@ function exbDoSearch(query) {
 // ════════════════════════════════════════════
 function escHtmlExb(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function el(id){return document.getElementById(id);}
-
-function openExibloxApp(){
-  const win=document.getElementById('win-exiblox');
-  if(win){win.style.display='flex';}
-  if(typeof initExiblox==='undefined'){
-    const script=document.createElement('script');
-    script.src='exiblox.js';
-    script.onload=()=>{if(typeof initExiblox==='function')initExiblox();};
-    document.body.appendChild(script);
-  }else{
-    initExiblox();
-  }
-}
